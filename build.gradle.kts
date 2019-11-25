@@ -14,8 +14,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.5.2")
-    testImplementation("org.mockito", "mockito-core", "3.1.0")
     implementation("com.github.kittinunf.fuel:fuel:2.2.1")
+    implementation("com.github.kittinunf.fuel:fuel-json:2.2.1")
 }
 
 tasks.test {

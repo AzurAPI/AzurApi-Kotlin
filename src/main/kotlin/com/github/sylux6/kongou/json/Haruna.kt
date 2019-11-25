@@ -1,6 +1,7 @@
 package com.github.sylux6.kongou.json
 
 import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.fuel.json.responseJson
 import com.github.kittinunf.result.Result;
 
 /**
@@ -11,7 +12,7 @@ object Haruna {
     fun loadShips() {
         HarunaInfo.JSON_SOURCE
             .httpGet()
-            .responseString { request, response, result ->
+            .responseJson { request, response, result ->
                 when(result) {
                     is Result.Failure -> {
                         println(result.getException())
