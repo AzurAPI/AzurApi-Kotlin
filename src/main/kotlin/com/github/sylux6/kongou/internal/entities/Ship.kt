@@ -1,72 +1,162 @@
 package com.github.sylux6.kongou.internal.entities
 
+/**
+ * Stars of a ship
+ * @param stars
+ * @param value
+ */
 data class Stars (
         val stars: String,
         val value: Int
 )
 
+/**
+ * Details about a skin of a ship
+ * @param enClient
+ * @param cnClient
+ * @param jpClient
+ * @param obtainedFrom
+ * @param cost
+ * @param isLive2D
+ */
 data class SkinInfo (
+        val enClient: String,
+        val cnClient: String,
+        val jpClient: String,
         val obtainedFrom: String,
-        val live2D: Boolean
+        val cost: Int,
+        val isLive2D: Boolean
 )
 
+/**
+ * Skin of a ship
+ * @param image
+ * @param background
+ * @param name
+ * @param chibi
+ * @param info
+ */
 data class Skin (
         val image: String,
-        val background: String,
+        val background: String?,
         val name: String,
-        val chibi: String,
-        val info: SkinInfo
+        val chibi: String?,
+        val info: SkinInfo?
 )
 
+/**
+ * Names of a ship in different language
+ * @param jp japanese name
+ * @param kr korean name
+ * @param en english name
+ * @param cn chinese name
+ */
 data class Name (
-        val jp: String,
-        val kr: String,
+        val jp: String?,
+        val kr: String?,
         val en: String,
-        val cn: String
+        val cn: String?
 )
 
+/**
+ * Stats details
+ * @param speed
+ * @param aviation
+ * @param health
+ * @param torpedo
+ * @param evasion
+ * @param luck
+ * @param armor
+ * @param reload
+ * @param antiAir
+ * @param oil
+ * @param accuracy
+ * @param antiSub
+ * @param firepower
+ */
 data class StatsDetails (
-        val speed: String,
-        val aviation: String,
-        val health: String,
-        val torpedo: String,
-        val evasion: String,
-        val luck: String,
+        val speed: Int,
+        val aviation: Int,
+        val health: Int,
+        val torpedo: Int,
+        val evasion: Int,
+        val luck: Int,
         val armor: String,
-        val reload: String,
-        val antiAir: String,
-        val oil: String,
-        val accuracy: String,
-        val antiSub: String,
-        val firepower: String
+        val reload: Int,
+        val antiAir: Int,
+        val oil: Int,
+        val accuracy: Int,
+        val antiSub: Int,
+        val firepower: Int
 )
 
+/**
+ * Base stats and stats of a ship at level 120, 100
+ * @param level120
+ * @param level100
+ * @param base
+ */
 data class Stats (
         val level120: StatsDetails,
         val level100: StatsDetails,
         val base: StatsDetails
 )
 
-data class Miscellaneous (
-        val voice: String,
-        val twitter: String,
-        val artist: String,
-        val web: String,
-        val pixiv: String
+/**
+ * Url
+ * @param name
+ * @param url
+ */
+data class Url (
+        val name: String,
+        val url: String
 )
 
+/**
+ * Miscellaneous info of a ship
+ * @param voice
+ * @param twitter
+ * @param artist
+ * @param web
+ * @param pixiv
+ */
+data class Miscellaneous (
+        val voice: String?,
+        val twitter: Url?,
+        val artist: String?,
+        val web: Url?,
+        val pixiv: Url?
+)
+
+/**
+ * Class representation of a ship
+ * @param thumbnail
+ * @param buildTime
+ * @param stars
+ * @param skins
+ * @param names
+ * @param nationality
+ * @param rarity
+ * @param stats
+ * @param wikiUrl
+ * @param id
+ * @param shipClass
+ * @param hullType
+ * @param misc
+ */
 data class Ship (
-        val thumbnail: String,
-        val buildTime: String,
-        val stars: Stars,
-        val skins: List<Skin>,
-        val names: Name,
-        val nationality: String,
-        val stats: Stats,
         val wikiUrl: String,
         val id: String,
+        val names: Name,
         val shipClass: String,
+        val nationality: String,
         val hullType: String,
-        val misc: Miscellaneous
+        val thumbnail: String,
+        val skins: List<Skin>,
+        val buildTime: String,
+        val rarity: String,
+        val stars: Stars?,
+        val stats: Stats?,
+        val misc: Miscellaneous?
 )
 

@@ -1,6 +1,6 @@
 plugins {
     `build-scan`
-    kotlin("jvm") version "1.3.60"
+    kotlin("jvm") version "1.3.61"
 }
 
 group = "com.github.sylux6.kongou"
@@ -16,6 +16,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.5.2")
     implementation("com.github.kittinunf.fuel:fuel:2.2.1")
     implementation("com.github.kittinunf.fuel:fuel-json:2.2.1")
+    implementation("org.json", "json", "20190722")
 }
 
 tasks.test {
