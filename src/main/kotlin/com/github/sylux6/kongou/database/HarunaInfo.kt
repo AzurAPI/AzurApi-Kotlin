@@ -1,4 +1,4 @@
-package com.github.sylux6.kongou.json
+package com.github.sylux6.kongou.database
 
 /**
  * JSON deserializer info

@@ -1,2 +1,2 @@
 # Kongou
-(WIP) A Kotlin wrapper for Azur Lane JSON
+A Kotlin wrapper for Azur Lane JSON
