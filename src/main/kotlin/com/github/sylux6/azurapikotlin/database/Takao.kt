@@ -1,16 +1,16 @@
-package com.github.sylux6.kongou.database
+package com.github.sylux6.azurapikotlin.database
 
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.json.responseJson
-import com.github.sylux6.kongou.internal.entities.Ship
-import com.github.sylux6.kongou.internal.exceptions.DatabaseException
-import com.github.sylux6.kongou.utils.ShipParser
+import com.github.sylux6.azurapikotlin.internal.entities.Ship
+import com.github.sylux6.azurapikotlin.internal.exceptions.DatabaseException
+import com.github.sylux6.azurapikotlin.utils.ShipParser
 import org.json.JSONObject
 
 /**
  * JSON deserializer object
  */
-object Haruna {
+object Takao {
 
     private lateinit var database: JSONObject
     var shipsById = HashMap<String, Ship>()
@@ -21,7 +21,7 @@ object Haruna {
     }
 
     fun loadJSON(): JSONObject {
-        val (_, response, result) = HarunaInfo.JSON_SOURCE
+        val (_, response, result) = TakaoInfo.JSON_SOURCE
             .httpGet()
             .responseJson()
         return if (response.statusCode == 200) {

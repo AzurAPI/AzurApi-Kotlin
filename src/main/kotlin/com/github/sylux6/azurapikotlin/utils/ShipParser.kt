@@ -1,7 +1,7 @@
-package com.github.sylux6.kongou.utils
+package com.github.sylux6.azurapikotlin.utils
 
-import com.github.sylux6.kongou.internal.entities.*
-import com.github.sylux6.kongou.internal.exceptions.DatabaseException
+import com.github.sylux6.azurapikotlin.internal.entities.*
+import com.github.sylux6.azurapikotlin.internal.exceptions.DatabaseException
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject

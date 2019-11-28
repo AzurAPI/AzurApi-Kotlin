@@ -1,16 +1,16 @@
-package com.github.sylux6.kongou.database
+package com.github.sylux6.azurapikotlin.database
 
 import com.github.kittinunf.fuel.httpGet
-import com.github.sylux6.kongou.utils.ShipParser
+import com.github.sylux6.azurapikotlin.utils.ShipParser
 import org.json.JSONObject
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class HarunaTests {
+class TakaoTests {
 
     @Test
     fun `should get remote json`() {
-        val (_, response, _) = HarunaInfo.JSON_SOURCE
+        val (_, response, _) = TakaoInfo.JSON_SOURCE
             .httpGet()
             .response()
         Assertions.assertEquals(response.statusCode, 200)
@@ -18,8 +18,8 @@ class HarunaTests {
 
     @Test
     fun `should init database`() {
-        Assertions.assertFalse(Haruna.shipsById.isEmpty())
-        Assertions.assertFalse(Haruna.shipsByName.isEmpty())
+        Assertions.assertFalse(Takao.shipsById.isEmpty())
+        Assertions.assertFalse(Takao.shipsByName.isEmpty())
     }
 
     @Test

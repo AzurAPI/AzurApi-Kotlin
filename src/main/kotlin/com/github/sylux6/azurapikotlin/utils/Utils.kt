@@ -1,4 +1,4 @@
-package com.github.sylux6.kongou.utils
+package com.github.sylux6.azurapikotlin.utils
 
 object Utils {
 

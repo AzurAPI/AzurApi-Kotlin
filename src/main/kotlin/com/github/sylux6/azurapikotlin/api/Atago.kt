@@ -1,9 +1,9 @@
-package com.github.sylux6.kongou.api
+package com.github.sylux6.azurapikotlin.api
 
 /**
  * API class
  */
-class Kongou {
+class Atago {
 
     /**
      * @since 1.0.0

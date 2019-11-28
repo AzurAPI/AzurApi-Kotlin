@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm") version "1.3.61"
 }
 
-group = "com.github.sylux6.kongou"
+group = "com.github.sylux6.azurapikotlin"
 version = "v1.0.0"
 
 repositories {
