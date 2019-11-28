@@ -1,4 +1,4 @@
-package com.github.sylux6.kongou.internal.exceptions
+package com.github.sylux6.azurapikotlin.internal.exceptions
 
 import java.lang.Exception
 

@@ -1,4 +1,4 @@
-package com.github.sylux6.kongou.internal.entities
+package com.github.sylux6.azurapikotlin.internal.entities
 
 /**
  * Stars of a ship
