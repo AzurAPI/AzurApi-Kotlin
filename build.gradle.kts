@@ -1,9 +1,12 @@
+val kotlinVersion = "1.3.61"
+val fuelVersion = "2.2.1"
+val kotlintestVersion = "3.4.2"
+
 plugins {
-    `build-scan`
     kotlin("jvm") version "1.3.61"
 }
 
-group = "com.github.sylux6.azurapikotlin"
+group = "com.github.azurapi.azurapikotlin"
 version = "v1.0.0"
 
 repositories {
@@ -13,17 +16,15 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.5.2")
-    implementation("com.github.kittinunf.fuel:fuel:2.2.1")
-    implementation("com.github.kittinunf.fuel:fuel-json:2.2.1")
+    implementation("com.github.kittinunf.fuel:fuel:$fuelVersion")
+    implementation("com.github.kittinunf.fuel:fuel-json:$fuelVersion")
     implementation("org.json", "json", "20190722")
+
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:$kotlintestVersion")
 }
 
-tasks.test {
+tasks.withType<Test> {
     useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
 }
 
 tasks {
@@ -33,11 +34,4 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
-}
-
-buildScan {
-    termsOfServiceUrl = "https://gradle.com/terms-of-service"
-    termsOfServiceAgree = "yes"
-
-    publishAlways()
 }

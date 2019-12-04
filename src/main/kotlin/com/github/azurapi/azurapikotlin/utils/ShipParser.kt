@@ -1,7 +1,7 @@
-package com.github.sylux6.azurapikotlin.utils
+package com.github.azurapi.azurapikotlin.utils
 
-import com.github.sylux6.azurapikotlin.internal.entities.*
-import com.github.sylux6.azurapikotlin.internal.exceptions.DatabaseException
+import com.github.azurapi.azurapikotlin.internal.entities.*
+import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -28,12 +28,16 @@ object ShipParser {
         }
         try {
             return SkinInfo(
-                    enClient = json.optString("EN Client"),
-                    cnClient = json.optString("CN Client"),
-                    jpClient = json.optString("JP Client"),
-                    obtainedFrom = json.getString("Obtained From"),
-                    cost = try { json.optString("Cost").toInt() } catch (e: NumberFormatException) { 0 },
-                    isLive2D = json.getString("Live2D Model") == "Yes"
+                enClient = json.optString("EN Client"),
+                cnClient = json.optString("CN Client"),
+                jpClient = json.optString("JP Client"),
+                obtainedFrom = json.getString("Obtained From"),
+                cost = try {
+                    json.optString("Cost").toInt()
+                } catch (e: NumberFormatException) {
+                    0
+                },
+                isLive2D = json.getString("Live2D Model") == "Yes"
             )
         } catch (e: JSONException) {
             throw e
@@ -49,7 +53,11 @@ object ShipParser {
                     image = skin.getString("image"),
                     background = skin.optString("background"),
                     chibi = skin.optString("chibi"),
-                    info = jsonToSkinInfo(skin.optJSONObject("info"))
+                    info = jsonToSkinInfo(
+                        skin.optJSONObject(
+                            "info"
+                        )
+                    )
                 )
             }
         } catch (e: JSONException) {
@@ -70,7 +78,8 @@ object ShipParser {
                 firepower = json.getInt("Firepower"),
                 health = json.getInt("Health"),
                 luck = json.getInt("Luck"),
-                oil = json.getInt("Oil consumption"),
+                // FIXME: it should be defined
+                oil = json.optInt("Oil consumption"),
                 reload = json.getInt("Reload"),
                 torpedo = json.getInt("Torpedo")
             )
@@ -85,9 +94,21 @@ object ShipParser {
         }
         try {
             return Stats(
-                    level120 = jsonToStatsDetails(json.getJSONObject("Level 120")),
-                    level100 = jsonToStatsDetails(json.getJSONObject("Level 100")),
-                    base = jsonToStatsDetails(json.getJSONObject("Base Stats"))
+                level120 = jsonToStatsDetails(
+                    json.getJSONObject(
+                        "Level 120"
+                    )
+                ),
+                level100 = jsonToStatsDetails(
+                    json.getJSONObject(
+                        "Level 100"
+                    )
+                ),
+                base = jsonToStatsDetails(
+                    json.getJSONObject(
+                        "Base Stats"
+                    )
+                )
             )
         } catch (e: JSONException) {
             throw e
@@ -129,9 +150,21 @@ object ShipParser {
         try {
             return Miscellaneous(
                 artist = json.optString("artist"),
-                web = jsonToUrl(json.optJSONObject("web")),
-                pixiv = jsonToUrl(json.optJSONObject("pixiv")),
-                twitter = jsonToUrl(json.optJSONObject("twitter")),
+                web = jsonToUrl(
+                    json.optJSONObject(
+                        "web"
+                    )
+                ),
+                pixiv = jsonToUrl(
+                    json.optJSONObject(
+                        "pixiv"
+                    )
+                ),
+                twitter = jsonToUrl(
+                    json.optJSONObject(
+                        "twitter"
+                    )
+                ),
                 voice = json.optString("voice")
             )
         } catch (e: JSONException) {
@@ -149,12 +182,32 @@ object ShipParser {
                 nationality = json.getString("nationality"),
                 rarity = json.getString("rarity"),
                 thumbnail = json.getString("thumbnail"),
-                shipClass = json.getString("class"),
-                names = jsonToNames(json.getJSONObject("names")),
-                skins = jsonToSkins(json.getJSONArray("skins")),
-                stats = jsonToStats(json.optJSONObject("stats")),
-                stars = jsonToStars(json.optJSONObject("stars")),
-                misc = jsonToMiscellaneous(json.optJSONObject("misc"))
+                shipClass = json.optString("class"),
+                names = jsonToNames(
+                    json.getJSONObject(
+                        "names"
+                    )
+                ),
+                skins = jsonToSkins(
+                    json.getJSONArray(
+                        "skins"
+                    )
+                ),
+                stats = jsonToStats(
+                    json.optJSONObject(
+                        "stats"
+                    )
+                ),
+                stars = jsonToStars(
+                    json.optJSONObject(
+                        "stars"
+                    )
+                ),
+                misc = jsonToMiscellaneous(
+                    json.optJSONObject(
+                        "misc"
+                    )
+                )
             )
         } catch (e: JSONException) {
             throw DatabaseException("Could not parse ship#$shipId: (${e.message})")

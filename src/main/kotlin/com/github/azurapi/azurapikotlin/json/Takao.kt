@@ -1,23 +1,24 @@
-package com.github.sylux6.azurapikotlin.database
+package com.github.azurapi.azurapikotlin.json
 
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.json.responseJson
-import com.github.sylux6.azurapikotlin.internal.entities.Ship
-import com.github.sylux6.azurapikotlin.internal.exceptions.DatabaseException
-import com.github.sylux6.azurapikotlin.utils.ShipParser
+import com.github.azurapi.azurapikotlin.internal.entities.Ship
+import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
+import com.github.azurapi.azurapikotlin.utils.ShipParser
 import org.json.JSONObject
 
 /**
  * JSON deserializer object
+ * @throws DatabaseException
  */
-object Takao {
+class Takao {
 
-    private lateinit var database: JSONObject
+    private lateinit var jsonDatabase: JSONObject
     var shipsById = HashMap<String, Ship>()
     var shipsByName = HashMap<String, Ship>()
 
     init {
-        reloadDatabase()
+        loadDatabase()
     }
 
     fun loadJSON(): JSONObject {
@@ -31,13 +32,13 @@ object Takao {
         }
     }
 
-    fun reloadDatabase() {
+    private fun loadDatabase() {
         try {
-            database = loadJSON()
-            for (shipId in database.keySet()) {
-                val ship = ShipParser.jsonToShip(database.getJSONObject(shipId), shipId)
-                shipsById[ship.id] = ship
-                shipsByName[ship.names.en] = ship
+            jsonDatabase = loadJSON()
+            for (shipId in jsonDatabase.keySet()) {
+                val ship = ShipParser.jsonToShip(jsonDatabase.getJSONObject(shipId), shipId)
+                shipsById[ship.id.toLowerCase()] = ship
+                shipsByName[ship.names.en.toLowerCase()] = ship
             }
         } catch (e: Exception) {
             throw DatabaseException("Could not reload database: (${e.message})")

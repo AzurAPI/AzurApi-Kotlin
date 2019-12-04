@@ -1,4 +1,4 @@
-package com.github.sylux6.azurapikotlin.internal.entities
+package com.github.azurapi.azurapikotlin.internal.entities
 
 /**
  * Stars of a ship
@@ -38,9 +38,9 @@ data class SkinInfo (
  */
 data class Skin (
         val image: String,
-        val background: String?,
+        val background: String,
         val name: String,
-        val chibi: String?,
+        val chibi: String,
         val info: SkinInfo?
 )
 
@@ -52,10 +52,10 @@ data class Skin (
  * @param cn chinese name
  */
 data class Name (
-        val jp: String?,
-        val kr: String?,
+        val jp: String,
+        val kr: String,
         val en: String,
-        val cn: String?
+        val cn: String
 )
 
 /**
@@ -97,9 +97,9 @@ data class StatsDetails (
  * @param base
  */
 data class Stats (
-        val level120: StatsDetails,
-        val level100: StatsDetails,
-        val base: StatsDetails
+    val level120: StatsDetails,
+    val level100: StatsDetails,
+    val base: StatsDetails
 )
 
 /**
@@ -121,11 +121,11 @@ data class Url (
  * @param pixiv
  */
 data class Miscellaneous (
-        val voice: String?,
-        val twitter: Url?,
-        val artist: String?,
-        val web: Url?,
-        val pixiv: Url?
+    val voice: String,
+    val twitter: Url?,
+    val artist: String?,
+    val web: Url?,
+    val pixiv: Url?
 )
 
 /**
@@ -145,18 +145,18 @@ data class Miscellaneous (
  * @param misc
  */
 data class Ship (
-        val wikiUrl: String,
-        val id: String,
-        val names: Name,
-        val shipClass: String,
-        val nationality: String,
-        val hullType: String,
-        val thumbnail: String,
-        val skins: List<Skin>,
-        val buildTime: String,
-        val rarity: String,
-        val stars: Stars?,
-        val stats: Stats?,
-        val misc: Miscellaneous?
+    val wikiUrl: String,
+    val id: String,
+    val names: Name,
+    val shipClass: String,
+    val nationality: String,
+    val hullType: String,
+    val thumbnail: String,
+    val skins: List<Skin>,
+    val buildTime: String,
+    val rarity: String,
+    val stars: Stars?,
+    val stats: Stats?,
+    val misc: Miscellaneous?
 )
 

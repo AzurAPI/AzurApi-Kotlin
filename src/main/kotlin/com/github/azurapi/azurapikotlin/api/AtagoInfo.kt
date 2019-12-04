@@ -1,4 +1,4 @@
-package com.github.sylux6.azurapikotlin.api
+package com.github.azurapi.azurapikotlin.api
 
 /**
  * API info
