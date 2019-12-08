@@ -1,6 +1,7 @@
 package com.github.azurapi.azurapikotlin.api
 
 import io.kotlintest.TestCase
+import io.kotlintest.matchers.boolean.shouldBeTrue
 import io.kotlintest.matchers.types.shouldNotBeNull
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
@@ -38,6 +39,12 @@ class AtagoTestCase : StringSpec() {
             version.lastUpdatedApi.shouldNotBeNull()
             version.lastUpdatedDatabase.shouldNotBeNull()
             version.apiVersion.shouldNotBeNull()
+        }
+
+        "it should update database" {
+            val oldDate = Atago.getVersion().lastUpdatedApi
+            Atago.reloadDatabase()
+            (Atago.getVersion().lastUpdatedApi > oldDate).shouldBeTrue()
         }
     }
 }

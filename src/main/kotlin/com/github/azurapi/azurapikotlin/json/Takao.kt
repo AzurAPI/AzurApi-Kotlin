@@ -20,7 +20,7 @@ class Takao {
     private lateinit var jsonDatabase: JSONObject
     private lateinit var jsonVersion: JSONObject
 
-    var lastUpdated: Date
+    lateinit var lastUpdated: Date
     lateinit var lastUpdatedDatabase: Date
     lateinit var databaseVersion: String
 
@@ -29,7 +29,6 @@ class Takao {
 
     init {
         loadDatabase()
-        lastUpdated = Date()
     }
 
     private fun loadJSON(url: String): JSONObject {
