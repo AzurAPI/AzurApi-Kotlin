@@ -40,5 +40,12 @@ dependencies {
 ```
 </details>
 
+## Example
+
+```kotlin
+val atago = Atago.getShipByName("atago")
+println(atago.names.en)
+```
+
 ## Support server
 ![Discord Banner 2](https://discordapp.com/api/guilds/648206344729526272/widget.png?style=banner2)

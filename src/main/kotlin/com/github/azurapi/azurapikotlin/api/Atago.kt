@@ -69,4 +69,13 @@ object Atago {
     fun getVersion(): Version {
         return Version(AtagoInfo.VERSION, database.lastUpdated, database.databaseVersion, database.lastUpdatedDatabase)
     }
+
+    /**
+     * @since 1.0.0
+     *
+     * Reload database from remote json
+     */
+    fun reloadDatabase() {
+        database.loadDatabase()
+    }
 }
