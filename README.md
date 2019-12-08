@@ -1,8 +1,11 @@
 # AzurApi-Kotlin
 A Kotlin wrapper for Azur Lane JSON
 
+[![](https://jitpack.io/v/AzurAPI/AzurApi-Kotlin.svg)](https://jitpack.io/#AzurAPI/AzurApi-Kotlin)
+
+
 ## Use
-<details><summary>Kotlin (build.gradle.kts)</summary>
+<details><summary>gradle</summary>
 
 ```kotlin
 repositories {
@@ -17,7 +20,7 @@ dependencies {
 ```
 </details>
 
-<details><summary>Maven</summary>
+<details><summary>maven</summary>
 
 ```xml
 <repositories>

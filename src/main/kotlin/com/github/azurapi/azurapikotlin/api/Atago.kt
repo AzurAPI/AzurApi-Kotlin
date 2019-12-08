@@ -13,7 +13,7 @@ import java.util.stream.Collectors
  * @throws DatabaseException
  * @throws ApiException
  */
-class Atago {
+object Atago {
 
     private val database = try {
         Takao()
@@ -28,9 +28,9 @@ class Atago {
      * @param name name of the ship
      */
     fun getShipByName(name: String): Ship {
-        val formattedName = name.toLowerCase()
-        if (database.shipsByName.containsKey(formattedName)) {
-            return database.shipsByName[formattedName]!!
+        val ship = database.findShip(name)
+        if (ship != null) {
+            return ship
         } else {
             throw ShipNotFoundException("Could not find ship with name: $name")
         }
