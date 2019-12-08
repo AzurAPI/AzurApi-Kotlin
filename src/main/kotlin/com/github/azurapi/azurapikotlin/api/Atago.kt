@@ -1,6 +1,7 @@
 package com.github.azurapi.azurapikotlin.api
 
 import com.github.azurapi.azurapikotlin.internal.entities.Ship
+import com.github.azurapi.azurapikotlin.internal.entities.Version
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundException
 import com.github.azurapi.azurapikotlin.internal.exceptions.ApiException
@@ -58,5 +59,14 @@ object Atago {
      */
     fun getAllShips(): List<Ship> {
         return database.shipsById.values.stream().collect(Collectors.toList())
+    }
+
+    /**
+     * @since 1.0.0
+     *
+     * Get version of the api wrapper
+     */
+    fun getVersion(): Version {
+        return Version(AtagoInfo.VERSION, database.lastUpdated, database.databaseVersion, database.lastUpdatedDatabase)
     }
 }
