@@ -1,9 +1,7 @@
 package com.github.azurapi.azurapikotlin.api
 
-import info.debatty.java.stringsimilarity.Cosine
-import info.debatty.java.stringsimilarity.Levenshtein
 import io.kotlintest.TestCase
-import io.kotlintest.matchers.boolean.shouldBeTrue
+import io.kotlintest.matchers.types.shouldNotBeNull
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 
@@ -28,6 +26,18 @@ class AtagoTestCase : StringSpec() {
         "it should find Jeanne d'Arc" {
             Atago.getShipByName("Jeanne d'Arc").names.en.shouldBe("Jeanne d'Arc")
             Atago.getShipByName("jeanne").names.en.shouldBe("Jeanne d'Arc")
+        }
+
+        "it should return Atago by her id" {
+            Atago.getShipById("201").names.en.shouldBe("Atago")
+        }
+
+        "it should return a Version object of the api" {
+            val version = Atago.getVersion()
+            version.databaseVersion.shouldNotBeNull()
+            version.lastUpdatedApi.shouldNotBeNull()
+            version.lastUpdatedDatabase.shouldNotBeNull()
+            version.apiVersion.shouldNotBeNull()
         }
     }
 }

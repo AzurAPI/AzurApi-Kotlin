@@ -1,31 +1,39 @@
 package com.github.azurapi.azurapikotlin.json
 
-import com.github.kittinunf.fuel.httpGet
-import com.github.kittinunf.fuel.json.responseJson
 import com.github.azurapi.azurapikotlin.internal.entities.Ship
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import com.github.azurapi.azurapikotlin.utils.ShipParser
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.fuel.json.responseJson
 import info.debatty.java.stringsimilarity.Cosine
-import info.debatty.java.stringsimilarity.Levenshtein
-import info.debatty.java.stringsimilarity.NormalizedLevenshtein
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.HashMap
 
 /**
- * JSON deserializer object
+ * JSON deserializer object.
+ * THIS CLASS IS NOT MEANT TO BE USED, USE ATAGO INSTEAD.
  * @throws DatabaseException
  */
 class Takao {
 
     private lateinit var jsonDatabase: JSONObject
+    private lateinit var jsonVersion: JSONObject
+
+    var lastUpdated: Date
+    lateinit var lastUpdatedDatabase: Date
+    lateinit var databaseVersion: String
+
     var shipsById = HashMap<String, Ship>()
     var shipsByName = HashMap<String, Ship>()
 
     init {
         loadDatabase()
+        lastUpdated = Date()
     }
 
-    fun loadJSON(): JSONObject {
-        val (_, response, result) = TakaoInfo.JSON_SOURCE
+    private fun loadJSON(url: String): JSONObject {
+        val (_, response, result) = url
             .httpGet()
             .responseJson()
         return if (response.statusCode == 200) {
@@ -35,14 +43,18 @@ class Takao {
         }
     }
 
-    private fun loadDatabase() {
+    fun loadDatabase() {
+        lastUpdated = Date()
         try {
-            jsonDatabase = loadJSON()
+            jsonDatabase = loadJSON(TakaoInfo.JSON_SOURCE)
+            jsonVersion = loadJSON(TakaoInfo.JSON_VERSION)
             for (shipId in jsonDatabase.keySet()) {
                 val ship = ShipParser.jsonToShip(jsonDatabase.getJSONObject(shipId), shipId)
                 shipsById[ship.id.toLowerCase()] = ship
                 shipsByName[ship.names.en.toLowerCase()] = ship
             }
+            databaseVersion = jsonVersion.getInt("version-number").toString()
+            lastUpdatedDatabase = Date(jsonVersion.getLong("last-data-refresh-date"))
         } catch (e: Exception) {
             throw DatabaseException("Could not reload database: (${e.message})")
         }
