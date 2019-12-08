@@ -5,6 +5,9 @@ import com.github.kittinunf.fuel.json.responseJson
 import com.github.azurapi.azurapikotlin.internal.entities.Ship
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import com.github.azurapi.azurapikotlin.utils.ShipParser
+import info.debatty.java.stringsimilarity.Cosine
+import info.debatty.java.stringsimilarity.Levenshtein
+import info.debatty.java.stringsimilarity.NormalizedLevenshtein
 import org.json.JSONObject
 
 /**
@@ -43,5 +46,23 @@ class Takao {
         } catch (e: Exception) {
             throw DatabaseException("Could not reload database: (${e.message})")
         }
+    }
+
+    /**
+     * Find the closest ship matching `search` terms
+     * @param search
+     */
+    fun findShip(search: String): Ship? {
+        val cosine = Cosine()
+        var bestScore = 0.0
+        var result: Ship? = null
+        for ((name, ship) in shipsByName.entries) {
+            val score = cosine.similarity(search.toLowerCase(), name)
+            if (score > bestScore) {
+                result = ship
+                bestScore = score
+            }
+        }
+        return result
     }
 }

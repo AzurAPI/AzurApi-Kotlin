@@ -26,6 +26,7 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:$fuelVersion")
     implementation("com.github.kittinunf.fuel:fuel-json:$fuelVersion")
     implementation("org.json", "json", "20190722")
+    implementation("info.debatty", "java-string-similarity", "1.2.1")
 
     testImplementation("io.kotlintest:kotlintest-runner-junit5:$kotlintestVersion")
 }
