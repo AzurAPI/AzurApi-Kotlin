@@ -12,6 +12,6 @@ import java.util.*
 data class Version (
     val apiVersion: String,
     val lastUpdatedApi: Date,
-    val databaseVersion: String,
+    val databaseVersion: Int,
     val lastUpdatedDatabase: Date
 )

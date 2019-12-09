@@ -20,9 +20,9 @@ class Takao {
     private lateinit var jsonDatabase: JSONObject
     private lateinit var jsonVersion: JSONObject
 
-    lateinit var lastUpdated: Date
-    lateinit var lastUpdatedDatabase: Date
-    lateinit var databaseVersion: String
+    lateinit var lastCheckDate: Date
+    lateinit var lastUpdatedDatabaseDate: Date
+    var databaseVersion = 0
 
     var shipsById = HashMap<String, Ship>()
     var shipsByName = HashMap<String, Ship>()
@@ -42,20 +42,39 @@ class Takao {
         }
     }
 
+    /**
+     * Load remote json and update local database
+     */
     fun loadDatabase() {
-        lastUpdated = Date()
+        lastCheckDate = Date()
+        val version = getRemoteDatabaseVersion()
+        // Database is already up to date
+        if (databaseVersion >= version.first) {
+            return
+        }
+        databaseVersion = version.first
+        lastUpdatedDatabaseDate = version.second
         try {
             jsonDatabase = loadJSON(TakaoInfo.JSON_SOURCE)
-            jsonVersion = loadJSON(TakaoInfo.JSON_VERSION)
             for (shipId in jsonDatabase.keySet()) {
                 val ship = ShipParser.jsonToShip(jsonDatabase.getJSONObject(shipId), shipId)
                 shipsById[ship.id.toLowerCase()] = ship
                 shipsByName[ship.names.en.toLowerCase()] = ship
             }
-            databaseVersion = jsonVersion.getInt("version-number").toString()
-            lastUpdatedDatabase = Date(jsonVersion.getLong("last-data-refresh-date"))
         } catch (e: Exception) {
             throw DatabaseException("Could not reload database: (${e.message})")
+        }
+    }
+
+    /**
+     * Get version of the remote json
+     */
+    private fun getRemoteDatabaseVersion(): Pair<Int, Date> {
+        try {
+            jsonVersion = loadJSON(TakaoInfo.JSON_VERSION)
+            return Pair(jsonVersion.getInt("version-number"), Date(jsonVersion.getLong("last-data-refresh-date")))
+        } catch (e: Exception) {
+            throw DatabaseException("Could not retrieve database version: (${e.message})")
         }
     }
 
