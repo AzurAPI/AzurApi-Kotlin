@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1 (2019-12-11)
+
+### Bug fixes
+
+- Fix json version parsing 
+
 ## 2.0.0 (2019-12-09)
 
 ### Breaking changes

@@ -71,7 +71,7 @@ class Takao {
      */
     private fun getRemoteDatabaseVersion(): Pair<Int, Date> {
         try {
-            jsonVersion = loadJSON(TakaoInfo.JSON_VERSION)
+            jsonVersion = loadJSON(TakaoInfo.JSON_VERSION).getJSONObject("ships")
             return Pair(jsonVersion.getInt("version-number"), Date(jsonVersion.getLong("last-data-refresh-date")))
         } catch (e: Exception) {
             throw DatabaseException("Could not retrieve database version: (${e.message})")
