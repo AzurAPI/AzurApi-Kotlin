@@ -67,12 +67,7 @@ object Atago {
      * Get version of the api wrapper
      */
     fun getVersion(): Version {
-        return Version(
-            AtagoInfo.VERSION,
-            database.lastCheckDate,
-            database.databaseVersion,
-            database.lastUpdatedDatabaseDate
-        )
+        return Version(AtagoInfo.VERSION, database.lastCheckDate, database.remoteJsonVersion)
     }
 
     /**

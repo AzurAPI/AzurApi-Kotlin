@@ -1,9 +1,12 @@
 package com.github.azurapi.azurapikotlin.internal.json
 
+import com.github.azurapi.azurapikotlin.internal.entities.Equipment
 import com.github.azurapi.azurapikotlin.internal.entities.Lang
+import com.github.azurapi.azurapikotlin.internal.entities.RemoteVersion
 import com.github.azurapi.azurapikotlin.internal.entities.Ship
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import com.github.azurapi.azurapikotlin.internal.utils.info.TakaoInfo
+import com.github.azurapi.azurapikotlin.internal.utils.parser.jsonToEquipment
 import com.github.azurapi.azurapikotlin.internal.utils.parser.jsonToShip
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.json.responseJson
@@ -18,18 +21,19 @@ import org.json.JSONObject
  */
 internal class Takao {
 
-    private lateinit var jsonDatabase: JSONObject
-    private lateinit var jsonVersion: JSONObject
+    private lateinit var jsonShipDatabase: JSONObject
+    private lateinit var jsonEquipmentDatabase: JSONObject
 
     lateinit var lastCheckDate: Date
-    lateinit var lastUpdatedDatabaseDate: Date
-    var databaseVersion = 0
+    var remoteJsonVersion = HashMap<String, RemoteVersion>()
 
     val shipsById = HashMap<String, Ship>()
     val shipsByEnName = HashMap<String, Ship>()
     val shipsByJpName = HashMap<String, Ship>()
     val shipsByKrName = HashMap<String, Ship>()
     val shipsByCnName = HashMap<String, Ship>()
+
+    var equipmentsById = HashMap<String, Equipment>()
 
     init {
         loadDatabase()
@@ -52,63 +56,100 @@ internal class Takao {
     fun loadDatabase() {
         lastCheckDate = Date()
         val version = getRemoteDatabaseVersion()
-        // Database is already up to date
-        if (databaseVersion >= version.first) {
-            return
-        }
-        databaseVersion = version.first
-        lastUpdatedDatabaseDate = version.second
         try {
-            jsonDatabase = loadJSON(TakaoInfo.JSON_SOURCE)
-            for (shipId in jsonDatabase.keySet()) {
-                val ship = jsonToShip(
-                    jsonDatabase.getJSONObject(shipId), shipId
-                )
-                shipsById[ship.id] = ship
-                shipsByEnName[ship.names.en] = ship
-                shipsByCnName[if (ship.names.cn.isNotEmpty()) ship.names.cn else ship.names.en] = ship
-                shipsByJpName[if (ship.names.jp.isNotEmpty()) ship.names.jp else ship.names.en] = ship
-                shipsByKrName[if (ship.names.kr.isNotEmpty()) ship.names.kr else ship.names.en] = ship
+            // Update ships
+            if (remoteJsonVersion["ships"]?.versionNumber ?: 0 < (version["ships"]
+                    ?: error("ships version not found")).versionNumber
+            ) {
+                remoteJsonVersion["ships"] = version["ships"] ?: error("ships version not found")
+                jsonShipDatabase = loadJSON(TakaoInfo.JSON_SHIP)
+                for (shipId in jsonShipDatabase.keySet()) {
+                    val ship = jsonToShip(jsonShipDatabase.getJSONObject(shipId), shipId)
+                    shipsById[ship.id] = ship
+                    shipsByEnName[ship.names.en] = ship
+                    shipsByCnName[if (ship.names.cn.isNotEmpty()) ship.names.cn else ship.names.en] = ship
+                    shipsByJpName[if (ship.names.jp.isNotEmpty()) ship.names.jp else ship.names.en] = ship
+                    shipsByKrName[if (ship.names.kr.isNotEmpty()) ship.names.kr else ship.names.en] = ship
+                }
             }
         } catch (e: Exception) {
-            throw DatabaseException("Could not reload database: (${e.message})")
+            throw DatabaseException("Could not reload ships database: (${e.message})")
+        }
+        try {
+            // Update equipments
+            if (remoteJsonVersion["equipments"]?.versionNumber ?: 0 < (version["equipments"]
+                    ?: error("equipments version not found")).versionNumber
+            ) {
+                remoteJsonVersion["equipments"] = version["equipments"] ?: error("equipments version not found")
+                jsonEquipmentDatabase = loadJSON(TakaoInfo.JSON_EQUIPMENT)
+                for (equipmentId in jsonEquipmentDatabase.keySet()) {
+                    val equipment = jsonToEquipment(jsonEquipmentDatabase.getJSONObject(equipmentId), equipmentId)
+                    equipmentsById[equipmentId] = equipment
+                }
+            }
+        } catch (e: Exception) {
+            throw DatabaseException("Could not reload equipements database: (${e.message})")
         }
     }
 
     /**
      * Get version of the remote json
      */
-    private fun getRemoteDatabaseVersion(): Pair<Int, Date> {
+    private fun getRemoteDatabaseVersion(): Map<String, RemoteVersion> {
+        val remoteVersion = HashMap<String, RemoteVersion>()
         try {
-            jsonVersion = loadJSON(TakaoInfo.JSON_VERSION).getJSONObject("ships")
-            return Pair(jsonVersion.getInt("version-number"), Date(jsonVersion.getLong("last-data-refresh-date")))
+            val jsonVersion = loadJSON(TakaoInfo.JSON_VERSION)
+            for (entity in jsonVersion.keys()) {
+                remoteVersion[entity] = RemoteVersion(
+                    jsonVersion.getJSONObject(entity).getInt("version-number"),
+                    Date(jsonVersion.getJSONObject(entity).getLong("last-data-refresh-date"))
+                )
+            }
+            return remoteVersion
         } catch (e: Exception) {
             throw DatabaseException("Could not retrieve database version: (${e.message})")
         }
     }
 
     /**
-     * Find the closest ship matching `search` terms
-     * @param search
+     * Returns the closest string from ``stringSet`` of ``search``
+     * @param stringSet set of strings to look at
+     * @param search string query
+     * @param ignoreCase ignore case, true by default
      */
-    fun findShip(search: String, lang: Lang): Ship? {
+    private fun closestString(stringSet: Set<String>, search: String, ignoreCase: Boolean = true): String? {
+        if (stringSet.isEmpty()) {
+            return null
+        }
         val cosine = Cosine()
         var bestScore = 0.0
-        var result: Ship? = null
-        val databaseLang = when (lang) {
+        var result: String = search
+        for (s in stringSet) {
+            val score = cosine.similarity(
+                if (ignoreCase) s.toLowerCase() else s,
+                if (ignoreCase) search.toLowerCase() else search
+            )
+            if (score > bestScore) {
+                result = s
+                bestScore = score
+            }
+        }
+        return result
+    }
+
+    /**
+     * Find the closest ship matching ``search`` terms
+     * @param search
+     * @param lang
+     */
+    fun findShip(search: String, lang: Lang): Ship? {
+        val shipsByName = when (lang) {
             Lang.EN -> shipsByEnName
             Lang.CN -> shipsByCnName
             Lang.JP -> shipsByJpName
             Lang.KR -> shipsByKrName
             Lang.ANY -> shipsByEnName + shipsByCnName + shipsByJpName + shipsByKrName
         }
-        for ((name, ship) in databaseLang.entries) {
-            val score = cosine.similarity(search.toLowerCase(), name.toLowerCase())
-            if (score > bestScore) {
-                result = ship
-                bestScore = score
-            }
-        }
-        return result
+        return shipsByName[closestString(shipsByName.keys, search)]
     }
 }

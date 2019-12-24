@@ -1,16 +1,6 @@
 package com.github.azurapi.azurapikotlin.internal.entities
 
 /**
- * Stars of a ship
- * @param stars
- * @param value
- */
-data class Stars(
-    val stars: String,
-    val value: Int
-)
-
-/**
  * Details about a skin of a ship
  * @param enClient
  * @param cnClient
@@ -42,20 +32,6 @@ data class Skin(
     val name: String,
     val chibi: String,
     val info: SkinInfo?
-)
-
-/**
- * Names of a ship in different language
- * @param jp japanese name
- * @param kr korean name
- * @param en english name
- * @param cn chinese name
- */
-data class Name(
-    val jp: String,
-    val kr: String,
-    val en: String,
-    val cn: String
 )
 
 /**

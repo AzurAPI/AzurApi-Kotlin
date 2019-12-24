@@ -18,9 +18,14 @@
 
 ## 3.1.0 (2020-01-25)
 
+### Breaking changes
+
+- **Version** class attributes change.
+
 ### New features
 
 - **getShipByName** can take an optional language parameter
+- **getEquipmentByName**: returns the closest equipment which name matches the requested name
 
 ### Bug fixes
 

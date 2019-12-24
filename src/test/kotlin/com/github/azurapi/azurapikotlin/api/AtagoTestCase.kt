@@ -61,9 +61,9 @@ class AtagoTestCase : Spek({
         }
 
         it("should update database") {
-            val oldDate = Atago.getVersion().lastUpdatedApi
+            val oldDate = Atago.getVersion().lastUpdatedDate
             Atago.reloadDatabase()
-            expect(Atago.getVersion().lastUpdatedApi > oldDate).toBe(true)
+            expect(Atago.getVersion().lastUpdatedDate > oldDate).toBe(true)
         }
     }
 })
