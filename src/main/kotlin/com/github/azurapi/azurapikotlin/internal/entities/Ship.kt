@@ -23,7 +23,7 @@ data class SkinInfo (
         val enClient: String,
         val cnClient: String,
         val jpClient: String,
-        val obtainedFrom: String,
+        val obtainedFrom: String?,
         val cost: Int,
         val isLive2D: Boolean
 )
@@ -113,6 +113,24 @@ data class Url (
 )
 
 /**
+ * Construction info of a ship
+ * @param constructionTime
+ * @param light
+ * @param heavy
+ * @param aviation
+ * @param limited
+ * @param exchange
+ */
+data class ShipConstruction (
+    val constructionTime: String,
+    val light: Boolean,
+    val heavy: Boolean,
+    val aviation: Boolean,
+    val limited: Boolean,
+    val exchange: Boolean
+)
+
+/**
  * Miscellaneous info of a ship
  * @param voice
  * @param twitter
@@ -121,7 +139,7 @@ data class Url (
  * @param pixiv
  */
 data class Miscellaneous (
-    val voice: String,
+    val voice: Url?,
     val twitter: Url?,
     val artist: String?,
     val web: Url?,
@@ -153,10 +171,11 @@ data class Ship (
     val hullType: String,
     val thumbnail: String,
     val skins: List<Skin>,
-    val buildTime: String,
     val rarity: String,
     val stars: Stars?,
     val stats: Stats?,
+    // No construction info for unreleased ships
+    val construction: ShipConstruction?,
     val misc: Miscellaneous?
 )
 

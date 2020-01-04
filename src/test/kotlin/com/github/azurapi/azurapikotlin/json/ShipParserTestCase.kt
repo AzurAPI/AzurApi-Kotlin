@@ -15,175 +15,315 @@ class ShipParserTestCase: StringSpec() {
     init {
         "it should correctly parse Atago" {
             val json = JSONObject("""
-            {"201": {
-                "wikiUrl": "https://azurlane.koumakan.jp/Atago",
-                "id": "201",
-                "names": {
-                    "en": "Atago",
-                    "cn": "爱宕",
-                    "jp": "愛宕",
-                    "kr": "아타고"
-                },
-                "class": "Takao",
-                "nationality": "Sakura Empire",
-                "hullType": "Heavy Cruiser",
-                "thumbnail": "https://azurlane.koumakan.jp/w/images/0/0c/AtagoIcon.png",
-                "skins": [
-                    {
-                        "name": "Default",
-                        "image": "https://azurlane.koumakan.jp/w/images/thumb/6/65/Atago.png/642px-Atago.png",
-                        "background": "https://azurlane.koumakan.jp/w/images/3/3a/MainDayBG.png",
-                        "chibi": "https://azurlane.koumakan.jp/w/images/3/33/AtagoChibi.png",
-                        "info": {
-                            "Obtained From": "Default",
-                            "Live2D Model": "No"
+            {
+                "201": {
+                    "wikiUrl": "https://azurlane.koumakan.jp/Atago",
+                    "id": "201",
+                    "names": {
+                        "en": "Atago",
+                        "code": "IJN Atago",
+                        "cn": "犬",
+                        "jp": "愛宕",
+                        "kr": "아타고"
+                    },
+                    "class": "Takao",
+                    "nationality": "Sakura Empire",
+                    "hullType": "Heavy Cruiser",
+                    "thumbnail": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/thumbnail.png",
+                    "rarity": "Super Rare",
+                    "stars": {
+                        "stars": "★★★☆☆☆",
+                        "value": 3
+                    },
+                    "stats": {
+                        "level120": {
+                            "health": "4295",
+                            "armor": "Medium",
+                            "reload": "175",
+                            "luck": "48",
+                            "firepower": "270",
+                            "torpedo": "245",
+                            "evasion": "79",
+                            "speed": "31",
+                            "antiair": "178",
+                            "aviation": "0",
+                            "oilConsumption": "12",
+                            "accuracyHit": "134",
+                            "antisubmarineWarfare": "0"
+                        },
+                        "level100": {
+                            "health": "3818",
+                            "armor": "Medium",
+                            "reload": "152",
+                            "luck": "48",
+                            "firepower": "236",
+                            "torpedo": "213",
+                            "evasion": "33",
+                            "speed": "31",
+                            "antiair": "155",
+                            "aviation": "0",
+                            "oilConsumption": "12",
+                            "accuracyHit": "119",
+                            "antisubmarineWarfare": "0"
+                        },
+                        "baseStats": {
+                            "health": "738",
+                            "armor": "Medium",
+                            "reload": "64",
+                            "luck": "48",
+                            "firepower": "50",
+                            "torpedo": "45",
+                            "evasion": "13",
+                            "speed": "31",
+                            "antiair": "33",
+                            "aviation": "0",
+                            "oilConsumption": "4",
+                            "accuracyHit": "46",
+                            "antisubmarineWarfare": "0"
                         }
                     },
-                    {
-                        "name": "Oath",
-                        "image": "https://azurlane.koumakan.jp/w/images/thumb/5/58/AtagoWedding.png/668px-AtagoWedding.png",
-                        "background": "https://azurlane.koumakan.jp/w/images/3/3a/MainDayBG.png",
-                        "chibi": "https://azurlane.koumakan.jp/w/images/1/1e/AtagoWeddingChibi.png",
-                        "info": {
-                            "EN Client": "Lily-White Vow",
-                            "CN Client": "",
-                            "JP Client": "White Promise",
-                            "Obtained From": "Oath",
-                            "Live2D Model": "No"
+                    "slots": {
+                        "1": {
+                            "type": "CA Guns",
+                            "minEfficiency": 130,
+                            "maxEfficiency": 135
+                        },
+                        "2": {
+                            "type": "Torpedoes",
+                            "minEfficiency": 145,
+                            "maxEfficiency": 170
+                        },
+                        "3": {
+                            "type": "Anti-Air Guns",
+                            "minEfficiency": 100,
+                            "maxEfficiency": 100
                         }
                     },
-                    {
-                        "name": "Summer March",
-                        "image": "https://azurlane.koumakan.jp/w/images/thumb/3/36/AtagoSummer.png/352px-AtagoSummer.png",
-                        "background": "https://azurlane.koumakan.jp/w/images/1/1c/Skin_BG_106.png",
-                        "chibi": "https://azurlane.koumakan.jp/w/images/0/01/AtagoSummerChibi.png",
-                        "info": {
-                            "EN Client": "Summer March",
-                            "CN Client": "",
-                            "JP Client": "Midsummer March",
-                            "Obtained From": "Skin Shop",
-                            "Cost": "700",
-                            "Live2D Model": "Yes"
+                    "enhanceValue": {
+                        "firepower": 28,
+                        "torpedo": 15,
+                        "aviation": 0,
+                        "reload": 12
+                    },
+                    "scrapValue": {
+                        "coin": 9,
+                        "oil": 3,
+                        "medal": 10
+                    },
+                    "skills": [
+                        {
+                            "icon": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skills/arsonist.png",
+                            "names": {
+                                "en": "Arsonist",
+                                "cn": "纵火狂魔",
+                                "jp": "爆炎開放"
+                            },
+                            "description": "Increases damage dealt with HE ammo by 5% (15%), Burn damage by 20% (50%), and chance to ignite with HE ammo by 4.5% (12%).",
+                            "color": "pink"
+                        },
+                        {
+                            "icon": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skills/double_torpedo.png",
+                            "names": {
+                                "en": "Double Torpedo",
+                                "cn": "鱼雷连射",
+                                "jp": "次発装填"
+                            },
+                            "description": "When launching a wave of torpedoes: 15% (30%) chance to launch another wave.",
+                            "color": "pink"
+                        },
+                        {
+                            "icon": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skills/all_out_assault.png",
+                            "names": {
+                                "en": "All Out Assault",
+                                "cn": "全弹发射",
+                                "jp": "全弾発射-高雄型"
+                            },
+                            "description": "Every 9 (6) shots from the main battery, triggers Full Barrage - Takao Class I (II).",
+                            "color": "pink"
+                        }
+                    ],
+                    "limitBreaks": [
+                        [
+                            "Gains Full Barrage I",
+                            "Main Gun Efficiency +5%"
+                        ],
+                        [
+                            "Max Torpedo Capacity +1",
+                            "Pre-Loaded Torpedo +1",
+                            "Torpedo Efficiency +10%"
+                        ],
+                        [
+                            "Upgrades Full Barrage I→II",
+                            "Torpedo Efficiency +15%"
+                        ]
+                    ],
+                    "fleetTech": {
+                        "statsBonus": {
+                            "collection": {
+                                "applicable": [
+                                    "Heavy cruiser",
+                                    "Large cruiser",
+                                    "Monitor"
+                                ],
+                                "stat": "Health",
+                                "bonus": "+1"
+                            },
+                            "maxLevel": {
+                                "applicable": [
+                                    "Heavy cruiser",
+                                    "Large cruiser",
+                                    "Monitor"
+                                ],
+                                "stat": "Torpedo",
+                                "bonus": "+1"
+                            }
+                        },
+                        "techPoints": {
+                            "collection": 14,
+                            "maxLimitBreak": 28,
+                            "maxLevel": 21,
+                            "total": 63
                         }
                     },
-                    {
-                        "name": "Hallmarks of Winter",
-                        "image": "https://azurlane.koumakan.jp/w/images/thumb/4/4e/AtagoNew_Year.png/462px-AtagoNew_Year.png",
-                        "background": "https://azurlane.koumakan.jp/w/images/5/5b/Skin_BG_101.png",
-                        "chibi": "https://azurlane.koumakan.jp/w/images/8/8b/AtagoNew_YearChibi.png",
-                        "info": {
-                            "EN Client": "Hallmarks of Winter",
-                            "CN Client": "",
-                            "JP Client": "Features of Winter",
-                            "Obtained From": "Skin Shop",
-                            "Cost": "780",
-                            "Live2D Model": "No"
+                    "construction": {
+                        "constructionTime": "02:05:00",
+                        "availableIn": {
+                            "light": false,
+                            "heavy": true,
+                            "aviation": true,
+                            "limited": false,
+                            "exchange": false
                         }
                     },
-                    {
-                        "name": "School Traumerei",
-                        "image": "https://azurlane.koumakan.jp/w/images/thumb/9/96/AtagoSchool.png/448px-AtagoSchool.png",
-                        "background": "https://azurlane.koumakan.jp/w/images/6/64/Skin_BG_103.png",
-                        "chibi": "https://azurlane.koumakan.jp/w/images/4/49/AtagoSchoolChibi.png",
-                        "info": {
-                            "EN Client": "School Traumerei",
-                            "CN Client": "",
-                            "JP Client": "School Traumerei",
-                            "Obtained From": "Skin Shop",
-                            "Cost": "880",
-                            "Live2D Model": "No"
+                    "gallery": [
+                        {
+                            "description": "Loading Screen featuring Takao, Atago, Akagi, and Kaga in a winter setting",
+                            "url": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/gallery/Bg_takao_1.png"
+                        },
+                        {
+                            "description": "Monarch, Atago, Takao, and Emile Bertin in the hot springs",
+                            "url": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/gallery/Bg_bath.png"
+                        },
+                        {
+                            "description": "Loading Screen featuring Atago during valentines",
+                            "url": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/gallery/Bg_valentines_3.png"
+                        },
+                        {
+                            "description": "Takao and Atago after making chocolates",
+                            "url": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/gallery/Bg_valentines_5.png"
+                        },
+                        {
+                            "description": "Taihou, Formidable, Bismarck, Roon, Tirpitz, Kaga, Amagi, Cleveland, Atago and Essex during Halloween",
+                            "url": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/gallery/Bg_2019.10.31_5.png"
                         }
-                    }
-                ],
-                "buildTime": "02:05:00",
-                "rarity": "Super Rare",
-                "stars": {
-                    "stars": "★★★☆☆☆",
-                    "value": 3
-                },
-                "stats": {
-                    "Level 120": {
-                        "Health": "4295",
-                        "Armor": "Medium",
-                        "Reload": "175",
-                        "Luck": "48",
-                        "Firepower": "270",
-                        "Torpedo": "245",
-                        "Evasion": "79",
-                        "Speed": "31",
-                        "Anti-air": "178",
-                        "Aviation": "0",
-                        "Oil consumption": "12",
-                        "Accuracy (Hit)": "134",
-                        "Anti-submarine warfare": "0"
+                    ],
+                    "misc": {
+                        "artist": "木shiyo",
+                        "web": {
+                            "name": "木shiyo",
+                            "url": "https://weibo.com/u/2481339344"
+                        },
+                        "pixiv": {
+                            "name": "木shiyo",
+                            "url": "https://www.pixiv.net/member.php?id=40222"
+                        },
+                        "twitter": {
+                            "name": "木shiyo",
+                            "url": "https://twitter.com/kishiyo1943"
+                        },
+                        "voice": {
+                            "name": "Ai Kayano",
+                            "url": "https://en.wikipedia.org/wiki/Ai_Kayano"
+                        }
                     },
-                    "Level 100": {
-                        "Health": "3818",
-                        "Armor": "Medium",
-                        "Reload": "152",
-                        "Luck": "48",
-                        "Firepower": "236",
-                        "Torpedo": "213",
-                        "Evasion": "33",
-                        "Speed": "31",
-                        "Anti-air": "155",
-                        "Aviation": "0",
-                        "Oil consumption": "12",
-                        "Accuracy (Hit)": "119",
-                        "Anti-submarine warfare": "0"
-                    },
-                    "Base Stats": {
-                        "Health": "738",
-                        "Armor": "Medium",
-                        "Reload": "64",
-                        "Luck": "48",
-                        "Firepower": "50",
-                        "Torpedo": "45",
-                        "Evasion": "13",
-                        "Speed": "31",
-                        "Anti-air": "33",
-                        "Aviation": "0",
-                        "Oil consumption": "4",
-                        "Accuracy (Hit)": "46",
-                        "Anti-submarine warfare": "0"
-                    }
-                },
-                "misc": {
-                    "artist": "木shiyo",
-                    "web": {
-                        "name": "木shiyo",
-                        "url": "https://weibo.com/u/2481339344"
-                    },
-                    "pixiv": {
-                        "name": "木shiyo",
-                        "url": "https://www.pixiv.net/member.php?id=40222"
-                    },
-                    "twitter": {
-                        "name": "木shiyo",
-                        "url": "https://twitter.com/kishiyo1943"
-                    },
-                    "voice": "Ai Kayano"
+                    "skins": [
+                        {
+                            "name": "Default",
+                            "image": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Default/image.png",
+                            "background": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/MainDayBG.png",
+                            "chibi": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Default/chibi.png",
+                            "info": {
+                                "obtainedFrom": "Default",
+                                "live2DModel": false
+                            }
+                        },
+                        {
+                            "name": "Oath",
+                            "image": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Oath/image.png",
+                            "background": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/MainDayBG.png",
+                            "chibi": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Oath/chibi.png",
+                            "info": {
+                                "enClient": "Lily-White Vow",
+                                "cnClient": "白花的誓言",
+                                "jpClient": "白き約束",
+                                "obtainedFrom": "Oath",
+                                "live2DModel": false
+                            }
+                        },
+                        {
+                            "name": "Summer March",
+                            "image": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Summer_March/image.png",
+                            "background": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/Skin_BG_106.png",
+                            "chibi": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Summer_March/chibi.png",
+                            "info": {
+                                "enClient": "Summer March",
+                                "cnClient": "盛夏进行曲",
+                                "jpClient": "真夏の行進曲",
+                                "obtainedFrom": "Skin Shop",
+                                "cost": 700,
+                                "live2DModel": true
+                            }
+                        },
+                        {
+                            "name": "Hallmarks of Winter",
+                            "image": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Hallmarks_of_Winter/image.png",
+                            "background": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/Skin_BG_101.png",
+                            "chibi": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Hallmarks_of_Winter/chibi.png",
+                            "info": {
+                                "enClient": "Hallmarks of Winter",
+                                "cnClient": "冬季风物诗",
+                                "jpClient": "冬の風物詩",
+                                "obtainedFrom": "Skin Shop",
+                                "cost": 780,
+                                "live2DModel": false
+                            }
+                        },
+                        {
+                            "name": "School Traumerei",
+                            "image": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/School_Traumerei/image.png",
+                            "background": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/Skin_BG_103.png",
+                            "chibi": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/School_Traumerei/chibi.png",
+                            "info": {
+                                "enClient": "School Traumerei",
+                                "cnClient": "学园幻想曲",
+                                "jpClient": "学園トロイメライ",
+                                "obtainedFrom": "Skin Shop",
+                                "cost": 880,
+                                "live2DModel": false
+                            }
+                        }
+                    ]
                 }
-            }}
+            }
         """.trimIndent())
             val atago = ShipParser.jsonToShip(json.optJSONObject("201"), "201")
 
             atago.wikiUrl.shouldBe("https://azurlane.koumakan.jp/Atago")
             atago.id.shouldBe("201")
             atago.names.en.shouldBe("Atago")
-            atago.names.cn.shouldBe("爱宕")
+            atago.names.cn.shouldBe("犬")
             atago.names.jp.shouldBe("愛宕")
             atago.names.kr.shouldBe("아타고")
             atago.shipClass.shouldBe("Takao")
             atago.nationality.shouldBe("Sakura Empire")
             atago.hullType.shouldBe("Heavy Cruiser")
-            atago.thumbnail.shouldBe("https://azurlane.koumakan.jp/w/images/0/0c/AtagoIcon.png")
+            atago.thumbnail.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/thumbnail.png")
 
             atago.skins.shouldHaveSize(5)
             atago.skins[0].name.shouldBe("Default")
-            atago.skins[0].image.shouldBe("https://azurlane.koumakan.jp/w/images/thumb/6/65/Atago.png/642px-Atago.png")
-            atago.skins[0].background.shouldBe("https://azurlane.koumakan.jp/w/images/3/3a/MainDayBG.png")
-            atago.skins[0].chibi.shouldBe("https://azurlane.koumakan.jp/w/images/3/33/AtagoChibi.png")
+            atago.skins[0].image.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Default/image.png")
+            atago.skins[0].background.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/MainDayBG.png")
+            atago.skins[0].chibi.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Default/chibi.png")
             atago.skins[0].info.shouldNotBeNull()
             atago.skins[0].info!!.enClient.shouldBeEmpty()
             atago.skins[0].info!!.cnClient.shouldBeEmpty()
@@ -192,54 +332,59 @@ class ShipParserTestCase: StringSpec() {
             atago.skins[0].info!!.obtainedFrom.shouldBe("Default")
             atago.skins[0].info!!.isLive2D.shouldBeFalse()
             atago.skins[1].name.shouldBe("Oath")
-            atago.skins[1].image.shouldBe("https://azurlane.koumakan.jp/w/images/thumb/5/58/AtagoWedding.png/668px-AtagoWedding.png")
-            atago.skins[1].background.shouldBe("https://azurlane.koumakan.jp/w/images/3/3a/MainDayBG.png")
-            atago.skins[1].chibi.shouldBe("https://azurlane.koumakan.jp/w/images/1/1e/AtagoWeddingChibi.png")
+            atago.skins[1].image.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Oath/image.png")
+            atago.skins[1].background.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/MainDayBG.png")
+            atago.skins[1].chibi.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Oath/chibi.png")
             atago.skins[1].info.shouldNotBeNull()
             atago.skins[1].info!!.enClient.shouldBe("Lily-White Vow")
-            atago.skins[1].info!!.cnClient.shouldBeEmpty()
-            atago.skins[1].info!!.jpClient.shouldBe("White Promise")
+            atago.skins[1].info!!.cnClient.shouldBe("白花的誓言")
+            atago.skins[1].info!!.jpClient.shouldBe("白き約束")
             atago.skins[1].info!!.cost.shouldBe(0)
             atago.skins[1].info!!.obtainedFrom.shouldBe("Oath")
             atago.skins[1].info!!.isLive2D.shouldBeFalse()
 
             atago.skins[2].name.shouldBe("Summer March")
-            atago.skins[2].image.shouldBe("https://azurlane.koumakan.jp/w/images/thumb/3/36/AtagoSummer.png/352px-AtagoSummer.png")
-            atago.skins[2].background.shouldBe("https://azurlane.koumakan.jp/w/images/1/1c/Skin_BG_106.png")
-            atago.skins[2].chibi.shouldBe("https://azurlane.koumakan.jp/w/images/0/01/AtagoSummerChibi.png")
+            atago.skins[2].image.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Summer_March/image.png")
+            atago.skins[2].background.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/Skin_BG_106.png")
+            atago.skins[2].chibi.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Summer_March/chibi.png")
             atago.skins[2].info.shouldNotBeNull()
             atago.skins[2].info!!.enClient.shouldBe("Summer March")
-            atago.skins[2].info!!.cnClient.shouldBe("")
-            atago.skins[2].info!!.jpClient.shouldBe("Midsummer March")
+            atago.skins[2].info!!.cnClient.shouldBe("盛夏进行曲")
+            atago.skins[2].info!!.jpClient.shouldBe("真夏の行進曲")
             atago.skins[2].info!!.cost.shouldBe(700)
             atago.skins[2].info!!.obtainedFrom.shouldBe("Skin Shop")
             atago.skins[2].info!!.isLive2D.shouldBeTrue()
 
             atago.skins[3].name.shouldBe("Hallmarks of Winter")
-            atago.skins[3].image.shouldBe("https://azurlane.koumakan.jp/w/images/thumb/4/4e/AtagoNew_Year.png/462px-AtagoNew_Year.png")
-            atago.skins[3].background.shouldBe("https://azurlane.koumakan.jp/w/images/5/5b/Skin_BG_101.png")
-            atago.skins[3].chibi.shouldBe("https://azurlane.koumakan.jp/w/images/8/8b/AtagoNew_YearChibi.png")
+            atago.skins[3].image.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Hallmarks_of_Winter/image.png")
+            atago.skins[3].background.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/Skin_BG_101.png")
+            atago.skins[3].chibi.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Hallmarks_of_Winter/chibi.png")
             atago.skins[3].info.shouldNotBeNull()
             atago.skins[3].info!!.enClient.shouldBe("Hallmarks of Winter")
-            atago.skins[3].info!!.cnClient.shouldBeEmpty()
-            atago.skins[3].info!!.jpClient.shouldBe("Features of Winter")
+            atago.skins[3].info!!.cnClient.shouldBe("冬季风物诗")
+            atago.skins[3].info!!.jpClient.shouldBe("冬の風物詩")
             atago.skins[3].info!!.cost.shouldBe(780)
             atago.skins[3].info!!.obtainedFrom.shouldBe("Skin Shop")
             atago.skins[3].info!!.isLive2D.shouldBeFalse()
 
             atago.skins[4].name.shouldBe("School Traumerei")
-            atago.skins[4].image.shouldBe("https://azurlane.koumakan.jp/w/images/thumb/9/96/AtagoSchool.png/448px-AtagoSchool.png")
-            atago.skins[4].background.shouldBe("https://azurlane.koumakan.jp/w/images/6/64/Skin_BG_103.png")
-            atago.skins[4].chibi.shouldBe("https://azurlane.koumakan.jp/w/images/4/49/AtagoSchoolChibi.png")
+            atago.skins[4].image.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/School_Traumerei/image.png")
+            atago.skins[4].background.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/Skin_BG_103.png")
+            atago.skins[4].chibi.shouldBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/School_Traumerei/chibi.png")
             atago.skins[4].info.shouldNotBeNull()
             atago.skins[4].info!!.enClient.shouldBe("School Traumerei")
-            atago.skins[4].info!!.cnClient.shouldBeEmpty()
-            atago.skins[4].info!!.jpClient.shouldBe("School Traumerei")
+            atago.skins[4].info!!.cnClient.shouldBe("学园幻想曲")
+            atago.skins[4].info!!.jpClient.shouldBe("学園トロイメライ")
             atago.skins[4].info!!.cost.shouldBe(880)
             atago.skins[4].info!!.obtainedFrom.shouldBe("Skin Shop")
             atago.skins[4].info!!.isLive2D.shouldBeFalse()
 
-            atago.buildTime.shouldBe("02:05:00")
+            atago.construction!!.constructionTime.shouldBe("02:05:00")
+            atago.construction!!.light.shouldBeFalse()
+            atago.construction!!.heavy.shouldBeTrue()
+            atago.construction!!.aviation.shouldBeTrue()
+            atago.construction!!.limited.shouldBeFalse()
+            atago.construction!!.exchange.shouldBeFalse()
             atago.rarity.shouldBe("Super Rare")
 
             atago.stars!!.stars.shouldBe("★★★☆☆☆")
@@ -294,7 +439,8 @@ class ShipParserTestCase: StringSpec() {
             atago.misc!!.pixiv!!.url.shouldBe("https://www.pixiv.net/member.php?id=40222")
             atago.misc!!.twitter!!.name.shouldBe("木shiyo")
             atago.misc!!.twitter!!.url.shouldBe("https://twitter.com/kishiyo1943")
-            atago.misc!!.voice.shouldBe("Ai Kayano")
+            atago.misc!!.voice!!.name.shouldBe("Ai Kayano")
+            atago.misc!!.voice!!.url.shouldBe("https://en.wikipedia.org/wiki/Ai_Kayano")
         }
     }
 }

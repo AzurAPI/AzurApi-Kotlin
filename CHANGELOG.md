@@ -1,5 +1,15 @@
 # Changelog
 
+Versions **< 3.0.0** are **DEPRECATED**
+
+## 3.0.0 (2020-01-06)
+
+### Breaking changes
+
+- **Ship**: 
+  - `buildTime` type change from `String` to `ShipConstruction`.
+  - `misc.voice` type change from `String` to `Url`.
+
 ## 2.0.1 (2019-12-11)
 
 ### Bug fixes

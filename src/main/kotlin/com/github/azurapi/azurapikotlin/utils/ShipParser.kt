@@ -28,16 +28,16 @@ object ShipParser {
         }
         try {
             return SkinInfo(
-                enClient = json.optString("EN Client"),
-                cnClient = json.optString("CN Client"),
-                jpClient = json.optString("JP Client"),
-                obtainedFrom = json.getString("Obtained From"),
+                enClient = json.optString("enClient"),
+                cnClient = json.optString("cnClient"),
+                jpClient = json.optString("jpClient"),
+                obtainedFrom = json.optString("obtainedFrom"),
                 cost = try {
-                    json.optString("Cost").toInt()
+                    json.optString("cost").toInt()
                 } catch (e: NumberFormatException) {
                     0
                 },
-                isLive2D = json.getString("Live2D Model") == "Yes"
+                isLive2D = json.getBoolean("live2DModel")
             )
         } catch (e: JSONException) {
             throw e
@@ -68,20 +68,20 @@ object ShipParser {
     private fun jsonToStatsDetails(json: JSONObject): StatsDetails {
         try {
             return StatsDetails(
-                speed = json.getInt("Speed"),
-                accuracy = json.getInt("Accuracy (Hit)"),
-                antiAir = json.getInt("Anti-air"),
-                antiSub = json.getInt("Anti-submarine warfare"),
-                armor = json.getString("Armor"),
-                aviation = json.getInt("Aviation"),
-                evasion = json.getInt("Evasion"),
-                firepower = json.getInt("Firepower"),
-                health = json.getInt("Health"),
-                luck = json.getInt("Luck"),
+                speed = json.getInt("speed"),
+                accuracy = json.getInt("accuracyHit"),
+                antiAir = json.getInt("antiair"),
+                antiSub = json.getInt("antisubmarineWarfare"),
+                armor = json.getString("armor"),
+                aviation = json.getInt("aviation"),
+                evasion = json.getInt("evasion"),
+                firepower = json.getInt("firepower"),
+                health = json.getInt("health"),
+                luck = json.getInt("luck"),
                 // FIXME: it should be defined
-                oil = json.optInt("Oil consumption"),
-                reload = json.getInt("Reload"),
-                torpedo = json.getInt("Torpedo")
+                oil = json.optInt("oilConsumption"),
+                reload = json.getInt("reload"),
+                torpedo = json.getInt("torpedo")
             )
         } catch (e: JSONException) {
             throw e
@@ -96,17 +96,17 @@ object ShipParser {
             return Stats(
                 level120 = jsonToStatsDetails(
                     json.getJSONObject(
-                        "Level 120"
+                        "level120"
                     )
                 ),
                 level100 = jsonToStatsDetails(
                     json.getJSONObject(
-                        "Level 100"
+                        "level100"
                     )
                 ),
                 base = jsonToStatsDetails(
                     json.getJSONObject(
-                        "Base Stats"
+                        "baseStats"
                     )
                 )
             )
@@ -143,6 +143,26 @@ object ShipParser {
         }
     }
 
+    private fun jsonToConstruction(json: JSONObject?): ShipConstruction? {
+        if (json == null) {
+            return null
+        }
+        try {
+            val availability = json.getJSONObject("availableIn")
+            // FIXME: not always a boolean
+            return ShipConstruction(
+                constructionTime = json.getString("constructionTime"),
+                light = availability.optBoolean("light", true),
+                heavy = availability.optBoolean("heavy", true),
+                aviation = availability.optBoolean("aviation", true),
+                limited = availability.optBoolean("limited", true),
+                exchange = availability.optBoolean("exchange", true)
+            )
+        } catch (e: JSONException) {
+            throw e
+        }
+    }
+
     private fun jsonToMiscellaneous(json: JSONObject?): Miscellaneous? {
         if (json == null) {
             return null
@@ -165,7 +185,11 @@ object ShipParser {
                         "twitter"
                     )
                 ),
-                voice = json.optString("voice")
+                voice = jsonToUrl(
+                    json.optJSONObject(
+                        "voice"
+                    )
+                )
             )
         } catch (e: JSONException) {
             throw e
@@ -177,7 +201,6 @@ object ShipParser {
             return Ship(
                 wikiUrl = json.getString("wikiUrl"),
                 id = json.getString("id"),
-                buildTime = json.optString("buildTime"),
                 hullType = json.getString("hullType"),
                 nationality = json.getString("nationality"),
                 rarity = json.getString("rarity"),
@@ -201,6 +224,11 @@ object ShipParser {
                 stars = jsonToStars(
                     json.optJSONObject(
                         "stars"
+                    )
+                ),
+                construction = jsonToConstruction(
+                    json.optJSONObject(
+                        "construction"
                     )
                 ),
                 misc = jsonToMiscellaneous(
