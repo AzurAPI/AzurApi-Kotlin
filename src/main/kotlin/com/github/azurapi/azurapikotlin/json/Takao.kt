@@ -92,7 +92,7 @@ class Takao {
         val cosine = Cosine()
         var bestScore = 0.0
         var result: Ship? = null
-        val databaseLang = when(lang) {
+        val databaseLang = when (lang) {
             Lang.EN -> shipsByEnName
             Lang.CN -> shipsByCnName
             Lang.JP -> shipsByJpName

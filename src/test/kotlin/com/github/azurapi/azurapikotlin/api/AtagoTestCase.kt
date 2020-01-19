@@ -2,7 +2,6 @@ package com.github.azurapi.azurapikotlin.api
 
 import com.github.azurapi.azurapikotlin.internal.entities.Lang
 import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundException
-import io.kotlintest.TestCase
 import io.kotlintest.matchers.boolean.shouldBeTrue
 import io.kotlintest.matchers.types.shouldNotBeNull
 import io.kotlintest.shouldBe
@@ -10,10 +9,6 @@ import io.kotlintest.shouldThrow
 import io.kotlintest.specs.StringSpec
 
 class AtagoTestCase : StringSpec() {
-
-    override fun beforeTest(testCase: TestCase) {
-        super.beforeTest(testCase)
-    }
 
     init {
         "it should find Atago" {

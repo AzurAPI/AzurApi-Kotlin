@@ -6,7 +6,7 @@ import io.kotlintest.matchers.boolean.shouldBeFalse
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 
-class TakaoTestCase: StringSpec() {
+class TakaoTestCase : StringSpec() {
 
     lateinit var takao: Takao
 
