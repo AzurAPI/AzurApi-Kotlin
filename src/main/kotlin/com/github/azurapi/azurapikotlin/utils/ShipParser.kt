@@ -1,11 +1,19 @@
 package com.github.azurapi.azurapikotlin.utils
 
-import com.github.azurapi.azurapikotlin.internal.entities.*
+import com.github.azurapi.azurapikotlin.internal.entities.Miscellaneous
+import com.github.azurapi.azurapikotlin.internal.entities.Name
+import com.github.azurapi.azurapikotlin.internal.entities.Ship
+import com.github.azurapi.azurapikotlin.internal.entities.ShipConstruction
+import com.github.azurapi.azurapikotlin.internal.entities.Skin
+import com.github.azurapi.azurapikotlin.internal.entities.SkinInfo
+import com.github.azurapi.azurapikotlin.internal.entities.Stars
+import com.github.azurapi.azurapikotlin.internal.entities.Stats
+import com.github.azurapi.azurapikotlin.internal.entities.StatsDetails
+import com.github.azurapi.azurapikotlin.internal.entities.Url
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.lang.NumberFormatException
 
 object ShipParser {
 

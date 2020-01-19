@@ -1,8 +1,14 @@
 # Changelog
 
-Versions **< 3.0.0** are **DEPRECATED**
+## 3.1.0 (2020-01-19)
+
+### New features
+
+- **getShipByName** can take an optional language parameter
 
 ## 3.0.0 (2020-01-06)
+
+Versions **< 3.0.0** are **DEPRECATED** and cannot be used
 
 ### Breaking changes
 
