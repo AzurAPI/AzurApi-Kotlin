@@ -10,11 +10,12 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import org.json.JSONObject
 
-class ShipParserTestCase: StringSpec() {
+class ShipParserTestCase : StringSpec() {
 
     init {
         "it should correctly parse Atago" {
-            val json = JSONObject("""
+            val json = JSONObject(
+                """
             {
                 "201": {
                     "wikiUrl": "https://azurlane.koumakan.jp/Atago",
@@ -305,7 +306,8 @@ class ShipParserTestCase: StringSpec() {
                     ]
                 }
             }
-        """.trimIndent())
+        """.trimIndent()
+            )
             val atago = ShipParser.jsonToShip(json.optJSONObject("201"), "201")
 
             atago.wikiUrl.shouldBe("https://azurlane.koumakan.jp/Atago")

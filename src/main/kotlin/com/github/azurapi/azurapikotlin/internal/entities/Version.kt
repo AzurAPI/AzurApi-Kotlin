@@ -1,6 +1,6 @@
 package com.github.azurapi.azurapikotlin.internal.entities
 
-import java.util.*
+import java.util.Date
 
 /**
  * Version representation
@@ -9,7 +9,7 @@ import java.util.*
  * @param databaseVersion json version
  * @param lastUpdatedDatabase last time json has been refreshed
  */
-data class Version (
+data class Version(
     val apiVersion: String,
     val lastUpdatedApi: Date,
     val databaseVersion: Int,
