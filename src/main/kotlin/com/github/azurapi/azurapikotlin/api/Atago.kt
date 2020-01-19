@@ -1,10 +1,11 @@
 package com.github.azurapi.azurapikotlin.api
 
+import com.github.azurapi.azurapikotlin.internal.entities.Lang
 import com.github.azurapi.azurapikotlin.internal.entities.Ship
 import com.github.azurapi.azurapikotlin.internal.entities.Version
+import com.github.azurapi.azurapikotlin.internal.exceptions.ApiException
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundException
-import com.github.azurapi.azurapikotlin.internal.exceptions.ApiException
 import com.github.azurapi.azurapikotlin.json.Takao
 import java.util.stream.Collectors
 
@@ -27,9 +28,10 @@ object Atago {
      *
      * Get information about a ship by name
      * @param name name of the ship
+     * @param lang language, any language by default
      */
-    fun getShipByName(name: String): Ship {
-        val ship = database.findShip(name)
+    fun getShipByName(name: String, lang: Lang = Lang.ANY): Ship {
+        val ship = database.findShip(name, lang)
         if (ship != null) {
             return ship
         } else {
@@ -43,13 +45,10 @@ object Atago {
      * Get information about a ship by id
      * @param id id of the ship
      */
-    fun getShipById(id: String): Ship {
-        val formattedId = id.toLowerCase()
-        if (database.shipsById.containsKey(formattedId)) {
-            return database.shipsById[formattedId]!!
-        } else {
-            throw ShipNotFoundException("Could not find ship with id: $id")
-        }
+    fun getShipById(id: String, caseSensitive: Boolean = false): Ship {
+        val formattedId = if (caseSensitive) id.toLowerCase() else id
+        return (if (caseSensitive) database.shipsById.mapKeys { it.key.toLowerCase() } else
+            database.shipsById)[formattedId] ?: throw ShipNotFoundException("Could not find ship with id: $id")
     }
 
     /**
@@ -67,7 +66,12 @@ object Atago {
      * Get version of the api wrapper
      */
     fun getVersion(): Version {
-        return Version(AtagoInfo.VERSION, database.lastCheckDate, database.databaseVersion, database.lastUpdatedDatabaseDate)
+        return Version(
+            AtagoInfo.VERSION,
+            database.lastCheckDate,
+            database.databaseVersion,
+            database.lastUpdatedDatabaseDate
+        )
     }
 
     /**

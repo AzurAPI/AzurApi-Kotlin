@@ -42,6 +42,8 @@ dependencies {
 
 ## Example
 
+Use methods from `Atago` class
+
 ```kotlin
 val atago = Atago.getShipByName("atago")
 println(atago.names.en)

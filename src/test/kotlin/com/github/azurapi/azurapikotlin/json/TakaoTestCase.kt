@@ -25,7 +25,10 @@ class TakaoTestCase: StringSpec() {
 
         "it should init json database" {
             takao.shipsById.isEmpty().shouldBeFalse()
-            takao.shipsByName.isEmpty().shouldBeFalse()
+            takao.shipsByEnName.isEmpty().shouldBeFalse()
+            takao.shipsByCnName.isEmpty().shouldBeFalse()
+            takao.shipsByJpName.isEmpty().shouldBeFalse()
+            takao.shipsByKrName.isEmpty().shouldBeFalse()
         }
     }
 }
