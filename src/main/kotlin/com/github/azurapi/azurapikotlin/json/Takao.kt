@@ -24,11 +24,11 @@ class Takao {
     lateinit var lastUpdatedDatabaseDate: Date
     var databaseVersion = 0
 
-    var shipsById = HashMap<String, Ship>()
-    var shipsByEnName = HashMap<String, Ship>()
-    var shipsByJpName = HashMap<String, Ship>()
-    var shipsByKrName = HashMap<String, Ship>()
-    var shipsByCnName = HashMap<String, Ship>()
+    val shipsById = HashMap<String, Ship>()
+    val shipsByEnName = HashMap<String, Ship>()
+    val shipsByJpName = HashMap<String, Ship>()
+    val shipsByKrName = HashMap<String, Ship>()
+    val shipsByCnName = HashMap<String, Ship>()
 
     init {
         loadDatabase()
