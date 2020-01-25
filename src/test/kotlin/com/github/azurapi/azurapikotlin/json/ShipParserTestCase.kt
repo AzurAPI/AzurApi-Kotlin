@@ -49,7 +49,7 @@ class ShipParserTestCase : StringSpec() {
                             "antiair": "178",
                             "aviation": "0",
                             "oilConsumption": "12",
-                            "accuracyHit": "134",
+                            "accuracy": "134",
                             "antisubmarineWarfare": "0"
                         },
                         "level100": {
@@ -64,7 +64,7 @@ class ShipParserTestCase : StringSpec() {
                             "antiair": "155",
                             "aviation": "0",
                             "oilConsumption": "12",
-                            "accuracyHit": "119",
+                            "accuracy": "119",
                             "antisubmarineWarfare": "0"
                         },
                         "baseStats": {
@@ -79,7 +79,7 @@ class ShipParserTestCase : StringSpec() {
                             "antiair": "33",
                             "aviation": "0",
                             "oilConsumption": "4",
-                            "accuracyHit": "46",
+                            "accuracy": "46",
                             "antisubmarineWarfare": "0"
                         }
                     },
@@ -245,7 +245,7 @@ class ShipParserTestCase : StringSpec() {
                             "chibi": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Default/chibi.png",
                             "info": {
                                 "obtainedFrom": "Default",
-                                "live2DModel": false
+                                "live2dModel": "No"
                             }
                         },
                         {
@@ -258,7 +258,7 @@ class ShipParserTestCase : StringSpec() {
                                 "cnClient": "白花的誓言",
                                 "jpClient": "白き約束",
                                 "obtainedFrom": "Oath",
-                                "live2DModel": false
+                                "live2dModel": "No"
                             }
                         },
                         {
@@ -272,7 +272,7 @@ class ShipParserTestCase : StringSpec() {
                                 "jpClient": "真夏の行進曲",
                                 "obtainedFrom": "Skin Shop",
                                 "cost": 700,
-                                "live2DModel": true
+                                "live2dModel": "Yes"
                             }
                         },
                         {
@@ -286,7 +286,7 @@ class ShipParserTestCase : StringSpec() {
                                 "jpClient": "冬の風物詩",
                                 "obtainedFrom": "Skin Shop",
                                 "cost": 780,
-                                "live2DModel": false
+                                "live2dModel": "No"
                             }
                         },
                         {
@@ -300,7 +300,7 @@ class ShipParserTestCase : StringSpec() {
                                 "jpClient": "学園トロイメライ",
                                 "obtainedFrom": "Skin Shop",
                                 "cost": 880,
-                                "live2DModel": false
+                                "live2dModel": "No"
                             }
                         }
                     ]

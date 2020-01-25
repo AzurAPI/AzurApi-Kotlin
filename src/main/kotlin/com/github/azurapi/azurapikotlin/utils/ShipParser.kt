@@ -45,7 +45,7 @@ object ShipParser {
                 } catch (e: NumberFormatException) {
                     0
                 },
-                isLive2D = json.getBoolean("live2DModel")
+                isLive2D = json.getString("live2dModel") == "Yes"
             )
         } catch (e: JSONException) {
             throw e
@@ -77,7 +77,7 @@ object ShipParser {
         try {
             return StatsDetails(
                 speed = json.getInt("speed"),
-                accuracy = json.getInt("accuracyHit"),
+                accuracy = json.getInt("accuracy"),
                 antiAir = json.getInt("antiair"),
                 antiSub = json.getInt("antisubmarineWarfare"),
                 armor = json.getString("armor"),
