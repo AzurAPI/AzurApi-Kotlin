@@ -80,6 +80,10 @@ object Atago {
      * Reload database from remote json
      */
     fun reloadDatabase() {
-        database.loadDatabase()
+        try {
+            database.loadDatabase()
+        } catch (e: Exception) {
+            throw ApiException("Could not reload database because: ${e.message}")
+        }
     }
 }
