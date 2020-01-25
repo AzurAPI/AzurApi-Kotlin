@@ -1,10 +1,14 @@
 # Changelog
 
-## 3.1.0 (2020-01-19)
+## 3.1.0 (2020-01-25)
 
 ### New features
 
 - **getShipByName** can take an optional language parameter
+
+### Bug fixes
+
+- Fix json parsing
 
 ## 3.0.0 (2020-01-06)
 
