@@ -6,7 +6,8 @@ import com.github.azurapi.azurapikotlin.internal.entities.Version
 import com.github.azurapi.azurapikotlin.internal.exceptions.ApiException
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundException
-import com.github.azurapi.azurapikotlin.json.Takao
+import com.github.azurapi.azurapikotlin.internal.json.Takao
+import com.github.azurapi.azurapikotlin.internal.utils.info.AtagoInfo
 import java.util.stream.Collectors
 
 /**

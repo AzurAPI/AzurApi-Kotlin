@@ -1,4 +1,4 @@
-package com.github.azurapi.azurapikotlin.api
+package com.github.azurapi.azurapikotlin.internal.utils.info
 
 /**
  * API info
