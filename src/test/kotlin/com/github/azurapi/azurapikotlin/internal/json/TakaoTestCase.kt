@@ -1,5 +1,6 @@
-package com.github.azurapi.azurapikotlin.json
+package com.github.azurapi.azurapikotlin.internal.json
 
+import com.github.azurapi.azurapikotlin.internal.utils.info.TakaoInfo
 import com.github.kittinunf.fuel.httpGet
 import io.kotlintest.TestCase
 import io.kotlintest.matchers.boolean.shouldBeFalse

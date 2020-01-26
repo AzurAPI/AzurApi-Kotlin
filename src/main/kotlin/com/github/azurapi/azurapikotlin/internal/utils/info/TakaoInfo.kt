@@ -1,4 +1,4 @@
-package com.github.azurapi.azurapikotlin.json
+package com.github.azurapi.azurapikotlin.internal.utils.info
 
 /**
  * JSON deserializer info

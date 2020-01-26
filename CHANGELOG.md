@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.1.2 (2020-01-26)
+
+### Bug fixes
+
+- Fix `isLive2D` parsing
+
+### Misc
+
+- Separate code into 2 packages: `api` and `internal`: `internal` contents are not meant to be used by users
+
+## 3.1.1 (2020-01-25)
+
+### Misc
+
+- `reloadDatabase` explicitly throws an exception
+
 ## 3.1.0 (2020-01-25)
 
 ### New features

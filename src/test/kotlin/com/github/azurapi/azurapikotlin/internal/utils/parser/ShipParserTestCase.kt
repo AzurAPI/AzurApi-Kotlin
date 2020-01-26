@@ -1,6 +1,5 @@
-package com.github.azurapi.azurapikotlin.json
+package com.github.azurapi.azurapikotlin.internal.utils.parser
 
-import com.github.azurapi.azurapikotlin.utils.ShipParser
 import io.kotlintest.matchers.boolean.shouldBeFalse
 import io.kotlintest.matchers.boolean.shouldBeTrue
 import io.kotlintest.matchers.collections.shouldHaveSize
@@ -245,7 +244,7 @@ class ShipParserTestCase : StringSpec() {
                             "chibi": "https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Default/chibi.png",
                             "info": {
                                 "obtainedFrom": "Default",
-                                "live2dModel": "No"
+                                "live2dModel": false
                             }
                         },
                         {
@@ -258,7 +257,7 @@ class ShipParserTestCase : StringSpec() {
                                 "cnClient": "白花的誓言",
                                 "jpClient": "白き約束",
                                 "obtainedFrom": "Oath",
-                                "live2dModel": "No"
+                                "live2dModel": false
                             }
                         },
                         {
@@ -272,7 +271,7 @@ class ShipParserTestCase : StringSpec() {
                                 "jpClient": "真夏の行進曲",
                                 "obtainedFrom": "Skin Shop",
                                 "cost": 700,
-                                "live2dModel": "Yes"
+                                "live2dModel": true
                             }
                         },
                         {
@@ -286,7 +285,7 @@ class ShipParserTestCase : StringSpec() {
                                 "jpClient": "冬の風物詩",
                                 "obtainedFrom": "Skin Shop",
                                 "cost": 780,
-                                "live2dModel": "No"
+                                "live2dModel": false
                             }
                         },
                         {
@@ -300,7 +299,7 @@ class ShipParserTestCase : StringSpec() {
                                 "jpClient": "学園トロイメライ",
                                 "obtainedFrom": "Skin Shop",
                                 "cost": 880,
-                                "live2dModel": "No"
+                                "live2dModel": false
                             }
                         }
                     ]
@@ -308,7 +307,9 @@ class ShipParserTestCase : StringSpec() {
             }
         """.trimIndent()
             )
-            val atago = ShipParser.jsonToShip(json.optJSONObject("201"), "201")
+            val atago = jsonToShip(
+                json.optJSONObject("201"), "201"
+            )
 
             atago.wikiUrl.shouldBe("https://azurlane.koumakan.jp/Atago")
             atago.id.shouldBe("201")

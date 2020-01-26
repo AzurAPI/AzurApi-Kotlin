@@ -1,9 +1,10 @@
-package com.github.azurapi.azurapikotlin.json
+package com.github.azurapi.azurapikotlin.internal.json
 
 import com.github.azurapi.azurapikotlin.internal.entities.Lang
 import com.github.azurapi.azurapikotlin.internal.entities.Ship
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
-import com.github.azurapi.azurapikotlin.utils.ShipParser
+import com.github.azurapi.azurapikotlin.internal.utils.info.TakaoInfo
+import com.github.azurapi.azurapikotlin.internal.utils.parser.jsonToShip
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.json.responseJson
 import info.debatty.java.stringsimilarity.Cosine
@@ -60,7 +61,9 @@ class Takao {
         try {
             jsonDatabase = loadJSON(TakaoInfo.JSON_SOURCE)
             for (shipId in jsonDatabase.keySet()) {
-                val ship = ShipParser.jsonToShip(jsonDatabase.getJSONObject(shipId), shipId)
+                val ship = jsonToShip(
+                    jsonDatabase.getJSONObject(shipId), shipId
+                )
                 shipsById[ship.id] = ship
                 shipsByEnName[ship.names.en] = ship
                 shipsByCnName[if (ship.names.cn.isNotEmpty()) ship.names.cn else ship.names.en] = ship
