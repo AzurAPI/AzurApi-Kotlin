@@ -2,7 +2,7 @@
 A Kotlin wrapper for Azur Lane JSON
 
 [![](https://jitpack.io/v/AzurAPI/AzurApi-Kotlin.svg)](https://jitpack.io/#AzurAPI/AzurApi-Kotlin)
-
+[![](https://jitpack.io/v/AzurAPI/AzurApi-Kotlin/month.svg)](https://jitpack.io/#AzurAPI/AzurApi-Kotlin)
 
 ## Use
 <details><summary>gradle</summary>
