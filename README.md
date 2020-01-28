@@ -1,8 +1,9 @@
 # AzurApi-Kotlin
 A Kotlin wrapper for Azur Lane JSON
 
-[![](https://jitpack.io/v/AzurAPI/AzurApi-Kotlin.svg)](https://jitpack.io/#AzurAPI/AzurApi-Kotlin)
-[![](https://jitpack.io/v/AzurAPI/AzurApi-Kotlin/week.svg)](https://jitpack.io/#AzurAPI/AzurApi-Kotlin)
+[![Release](https://jitpack.io/v/AzurAPI/AzurApi-Kotlin.svg?style=flat-square)](https://jitpack.io/#AzurAPI/AzurApi-Kotlin)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fazurapi%2Fazurapi-kotlin%2Fbadge&style=flat-square)](https://actions-badge.atrox.dev/azurapi/azurapi-kotlin/goto)
+[![Downloads](https://jitpack.io/v/AzurAPI/AzurApi-Kotlin/week.svg?style=flat-square)](https://jitpack.io/#AzurAPI/AzurApi-Kotlin)
 
 ## Use
 <details><summary>gradle</summary>
