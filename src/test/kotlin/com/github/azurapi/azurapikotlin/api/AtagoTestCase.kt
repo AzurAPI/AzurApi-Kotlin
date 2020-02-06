@@ -1,8 +1,12 @@
 package com.github.azurapi.azurapikotlin.api
 
+import ch.tutteli.atrium.api.fluent.en_GB.message
+import ch.tutteli.atrium.api.fluent.en_GB.startsWith
 import ch.tutteli.atrium.api.fluent.en_GB.toBe
+import ch.tutteli.atrium.api.fluent.en_GB.toThrow
 import ch.tutteli.atrium.api.verbs.expect
 import com.github.azurapi.azurapikotlin.internal.entities.Lang
+import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundException
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
@@ -22,18 +26,14 @@ class AtagoTestCase : Spek({
         }
 
         it("should not find Atago") {
-//            shouldThrow<ShipNotFoundException> {
-//                Atago.getShipByName("Atago", Lang.CN)
-//            }.message.shouldBe("Could not find ship with name: Atago")
-//            shouldThrow<ShipNotFoundException> {
-//                Atago.getShipByName("Atago", Lang.KR)
-//            }.message.shouldBe("Could not find ship with name: Atago")
-//            shouldThrow<ShipNotFoundException> {
-//                Atago.getShipByName("Atago", Lang.JP)
-//            }.message.shouldBe("Could not find ship with name: Atago")
-//            shouldThrow<ShipNotFoundException> {
-//                Atago.getShipByName("愛宕", Lang.EN)
-//            }.message.shouldBe("Could not find ship with name: 愛宕")
+            expect { Atago.getShipByName("Atago", Lang.CN) }
+                .toThrow<ShipNotFoundException>().message.startsWith("Could not find ship with name: Atago")
+            expect { Atago.getShipByName("Atago", Lang.KR) }
+                .toThrow<ShipNotFoundException>().message.startsWith("Could not find ship with name: Atago")
+            expect { Atago.getShipByName("Atago", Lang.JP) }
+                .toThrow<ShipNotFoundException>().message.startsWith("Could not find ship with name: Atago")
+            expect { Atago.getShipByName("愛宕", Lang.EN) }
+                .toThrow<ShipNotFoundException>().message.startsWith("Could not find ship with name: 愛宕")
         }
 
         it("should find Belfast") {
