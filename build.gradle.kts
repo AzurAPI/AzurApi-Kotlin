@@ -1,11 +1,12 @@
 val kotlinVersion = "1.3.61"
 val fuelVersion = "2.2.1"
-val kotlintestVersion = "3.4.2"
+val spekVersion = "2.0.9"
 
 plugins {
     java
-    maven
+    `maven-publish`
     kotlin("jvm") version "1.3.61"
+    id("org.jmailen.kotlinter") version "2.3.0"
 }
 
 group = "com.github.AzurApi"
@@ -28,14 +29,17 @@ dependencies {
     implementation("org.json", "json", "20190722")
     implementation("info.debatty", "java-string-similarity", "1.2.1")
 
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:$kotlintestVersion")
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
+    testRuntimeOnly("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    testImplementation("io.mockk:mockk:1.9.3")
+    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.9.1")
 }
 
 tasks {
     test {
-        useJUnitPlatform()
-        testLogging {
-            events("passed", "skipped", "failed")
+        useJUnitPlatform {
+            includeEngines("spek2")
         }
     }
     compileKotlin {

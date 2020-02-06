@@ -178,4 +178,3 @@ data class Ship(
     val construction: ShipConstruction?,
     val misc: Miscellaneous?
 )
-
