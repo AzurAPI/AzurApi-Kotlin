@@ -8,8 +8,8 @@ import com.github.azurapi.azurapikotlin.internal.utils.parser.jsonToShip
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.json.responseJson
 import info.debatty.java.stringsimilarity.Cosine
-import org.json.JSONObject
 import java.util.Date
+import org.json.JSONObject
 
 /**
  * JSON deserializer object.
