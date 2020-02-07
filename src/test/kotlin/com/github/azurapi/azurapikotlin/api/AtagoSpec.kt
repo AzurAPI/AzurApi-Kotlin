@@ -10,7 +10,7 @@ import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundExceptio
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
 
-class AtagoTestCase : Spek({
+class AtagoSpec : Spek({
     describe("Atago") {
         it("should find Atago") {
             expect(Atago.getShipByName("aTa  gOo", Lang.EN).names.en).toBe("Atago")

@@ -61,9 +61,7 @@ class Takao {
         try {
             jsonDatabase = loadJSON(TakaoInfo.JSON_SOURCE)
             for (shipId in jsonDatabase.keySet()) {
-                val ship = jsonToShip(
-                    jsonDatabase.getJSONObject(shipId), shipId
-                )
+                val ship = jsonToShip(jsonDatabase.getJSONObject(shipId), shipId)
                 shipsById[ship.id] = ship
                 shipsByEnName[ship.names.en] = ship
                 shipsByCnName[if (ship.names.cn.isNotEmpty()) ship.names.cn else ship.names.en] = ship

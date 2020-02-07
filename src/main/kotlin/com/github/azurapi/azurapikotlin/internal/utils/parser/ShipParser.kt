@@ -43,7 +43,8 @@ private fun jsonToSkinInfo(json: JSONObject?): SkinInfo? {
             } catch (e: NumberFormatException) {
                 0
             },
-            isLive2D = json.getBoolean("live2dModel")
+            // FIXME: Why optBoolean ?
+            isLive2D = json.optBoolean("live2dModel")
         )
     } catch (e: JSONException) {
         throw e

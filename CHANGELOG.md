@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.3 (2020-02-07)
+
+### Bug fixes
+
+- Hotfix `isLive2D`
+
 ## 3.1.2 (2020-01-26)
 
 ### Bug fixes
