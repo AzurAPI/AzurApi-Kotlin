@@ -16,7 +16,7 @@ import org.json.JSONObject
  * THIS CLASS IS NOT MEANT TO BE USED, USE ATAGO INSTEAD.
  * @throws DatabaseException
  */
-class Takao {
+internal class Takao {
 
     private lateinit var jsonDatabase: JSONObject
     private lateinit var jsonVersion: JSONObject
