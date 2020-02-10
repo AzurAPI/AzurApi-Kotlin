@@ -1,5 +1,6 @@
 package com.github.azurapi.azurapikotlin.internal.utils.parser
 
+import com.github.azurapi.azurapikotlin.internal.entities.CharacteristicValue
 import com.github.azurapi.azurapikotlin.internal.entities.DamageStats
 import com.github.azurapi.azurapikotlin.internal.entities.Equipment
 import com.github.azurapi.azurapikotlin.internal.entities.EquipmentFit
@@ -16,32 +17,49 @@ import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import org.json.JSONException
 import org.json.JSONObject
 
-internal fun jsonToVolleyStats(json: JSONObject): VolleyStats {
+internal fun jsonToCharacteristicValue(json: JSONObject): CharacteristicValue {
+    return CharacteristicValue(
+        type = json.getString("type"),
+        value = json.getString("value"),
+        formatted = json.getString("formated")
+    )
+}
+
+internal fun jsonToVolleyStats(json: JSONObject?): VolleyStats? {
+    if (json == null) {
+        return null
+    }
     return VolleyStats(
         type = json.getString("type"),
         multiplier = json.getInt("multiplier"),
         count = json.getInt("count"),
         unit = json.getString("unit"),
-        formatted = json.getString("formatted")
+        formatted = json.getString("formated")
     )
 }
 
-internal fun jsonToUnitTypeValue(json: JSONObject): UnitTypeValue {
+internal fun jsonToUnitTypeValue(json: JSONObject?): UnitTypeValue? {
+    if (json == null) {
+        return null
+    }
     return UnitTypeValue(
         type = json.getString("type"),
         value = json.getInt("value"),
         unit = json.getString("unit"),
-        formatted = json.getString("formatted")
+        formatted = json.getString("formated")
     )
 }
 
-internal fun jsonToDamageStats(json: JSONObject): DamageStats {
+internal fun jsonToDamageStats(json: JSONObject?): DamageStats? {
+    if (json == null) {
+        return null
+    }
     return DamageStats(
         type = json.getString("type"),
         min = json.getInt("min"),
         max = json.getInt("max"),
         multiplier = json.getInt("multiplier"),
-        formatted = json.getString("formatted")
+        formatted = json.getString("formated")
     )
 }
 
@@ -51,32 +69,37 @@ internal fun jsonToRateOfFireStats(json: JSONObject): RateOfFireStats {
         min = json.getString("min").filterNot { it == 's' }.toFloat(),
         max = json.getString("max").filterNot { it == 's' }.toFloat(),
         per = json.getString("per"),
-        formatted = json.getString("formatted")
+        formatted = json.getString("formated")
     )
 }
 
-internal fun jsonToTypeValue(json: JSONObject): TypeValue {
+internal fun jsonToTypeValue(json: JSONObject?): TypeValue? {
+    if (json == null) {
+        return null
+    }
     return TypeValue(
-        type = json.getString("types"),
+        type = json.getString("type"),
         value = json.getInt("value"),
-        formatted = json.getString("formatted")
+        formatted = json.getString("formated")
     )
 }
 
 internal fun jsonToEquipmentStats(json: JSONObject): EquipmentStats {
     return EquipmentStats(
-        firepower = jsonToTypeValue(json.getJSONObject("firepower")),
-        antiAir = jsonToTypeValue(json.getJSONObject("antiAir")),
-        damage = jsonToDamageStats(json.getJSONObject("damage")),
+        firepower = jsonToTypeValue(json.optJSONObject("firepower")),
+        antiAir = jsonToTypeValue(json.optJSONObject("antiAir")),
+        damage = jsonToDamageStats(json.optJSONObject("damage")),
         rateOfFire = jsonToRateOfFireStats(json.getJSONObject("rateOfFire")),
-        spread = jsonToUnitTypeValue(json.getJSONObject("spread")),
-        angle = jsonToUnitTypeValue(json.getJSONObject("angle")),
-        range = jsonToTypeValue(json.getJSONObject("range")),
-        volley = jsonToVolleyStats(json.getJSONObject("volley")),
-        volleyTime = jsonToTypeValue(json.getJSONObject("volleyTime")),
-        coefficient = jsonToTypeValue(json.getJSONObject("coefficient")),
-        ammoType = jsonToTypeValue(json.getJSONObject("ammoType")),
-        characteristic = jsonToTypeValue(json.getJSONObject("characteristic"))
+        spread = jsonToUnitTypeValue(json.getJSONObject("spread"))!!,
+        angle = jsonToUnitTypeValue(json.getJSONObject("angle"))!!,
+        range = jsonToTypeValue(json.getJSONObject("range"))!!,
+        volley = jsonToVolleyStats(json.optJSONObject("volley")),
+        volleyTime = jsonToTypeValue(json.optJSONObject("volleyTime")),
+        coefficient = jsonToTypeValue(json.optJSONObject("coefficient")),
+        ammoType = jsonToTypeValue(json.optJSONObject("ammoType")),
+        characteristic = jsonToCharacteristicValue(json.getJSONObject("characteristic")),
+        torpedo = jsonToTypeValue(json.optJSONObject("torpedo")),
+        numberOfTorpedoes = jsonToUnitTypeValue(json.optJSONObject("noOfTorpedoes"))
     )
 }
 
@@ -85,7 +108,7 @@ internal fun jsonToEquipmentTiers(json: JSONObject): Map<String, Tier> {
     for (key in json.keys()) {
         val tier = json.getJSONObject(key)
         tiers[key] = Tier(
-            tier = tier.getString("name"),
+            tier = tier.getString("tier"),
             rarity = tier.getString("rarity"),
             stars = jsonToStars(tier.getJSONObject("stars"))!!,
             stats = jsonToEquipmentStats(tier.getJSONObject("stats"))

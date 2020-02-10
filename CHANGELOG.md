@@ -1,5 +1,16 @@
 # Changelog
 
+## 4.0.0 (2020-02-10)
+
+### Breaking Changes
+
+- `Version` class rework
+- `getAllShips` returns a `Sequence` instead of `List`
+
+### New features
+
+- **getEquipmentByName**: returns the closest equipment which name matches the requested name
+
 ## 3.1.2 (2020-01-26)
 
 ### Bug fixes

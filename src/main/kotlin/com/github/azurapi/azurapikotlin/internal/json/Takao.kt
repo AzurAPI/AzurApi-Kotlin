@@ -33,7 +33,10 @@ internal class Takao {
     val shipsByKrName = HashMap<String, Ship>()
     val shipsByCnName = HashMap<String, Ship>()
 
-    var equipmentsById = HashMap<String, Equipment>()
+    val equipmentsByEnName = HashMap<String, Equipment>()
+    val equipmentsByJpName = HashMap<String, Equipment>()
+    val equipmentsByKrName = HashMap<String, Equipment>()
+    val equipmentsByCnName = HashMap<String, Equipment>()
 
     init {
         loadDatabase()
@@ -84,7 +87,10 @@ internal class Takao {
                 jsonEquipmentDatabase = loadJSON(TakaoInfo.JSON_EQUIPMENT)
                 for (equipmentId in jsonEquipmentDatabase.keySet()) {
                     val equipment = jsonToEquipment(jsonEquipmentDatabase.getJSONObject(equipmentId), equipmentId)
-                    equipmentsById[equipmentId] = equipment
+                    equipmentsByEnName[equipment.names.en] = equipment
+                    equipmentsByEnName[equipment.names.cn] = equipment
+                    equipmentsByEnName[equipment.names.jp] = equipment
+                    equipmentsByEnName[equipment.names.kr] = equipment
                 }
             }
         } catch (e: Exception) {
@@ -138,7 +144,7 @@ internal class Takao {
     }
 
     /**
-     * Find the closest ship matching ``search`` terms
+     * Find the closest ship matching `search` terms
      * @param search
      * @param lang
      */
@@ -151,5 +157,21 @@ internal class Takao {
             Lang.ANY -> shipsByEnName + shipsByCnName + shipsByJpName + shipsByKrName
         }
         return shipsByName[closestString(shipsByName.keys, search)]
+    }
+
+    /**
+     * Find the closest equipment matching `search` terms
+     * @param search
+     * @param lang
+     */
+    fun findEquipment(search: String, lang: Lang): Equipment? {
+        val equipmentsByName = when (lang) {
+            Lang.EN -> equipmentsByEnName
+            Lang.CN -> equipmentsByCnName
+            Lang.JP -> equipmentsByJpName
+            Lang.KR -> equipmentsByKrName
+            Lang.ANY -> equipmentsByEnName + equipmentsByCnName + equipmentsByJpName + equipmentsByKrName
+        }
+        return equipmentsByName[closestString(equipmentsByName.keys, search)]
     }
 }

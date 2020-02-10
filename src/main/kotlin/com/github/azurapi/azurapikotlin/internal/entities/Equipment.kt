@@ -72,6 +72,18 @@ data class VolleyStats(
 )
 
 /**
+ * Characteristic
+ * @param type
+ * @param value
+ * @param formatted
+ */
+data class CharacteristicValue(
+    val type: String,
+    val value: String,
+    val formatted: String
+)
+
+/**
  * Equipment stats
  * @param firepower
  * @param antiAir
@@ -87,18 +99,20 @@ data class VolleyStats(
  * @param characteristic
  */
 data class EquipmentStats(
-    val firepower: TypeValue,
-    val antiAir: TypeValue,
-    val damage: DamageStats,
+    val firepower: TypeValue?,
+    val antiAir: TypeValue?,
+    val damage: DamageStats?,
     val rateOfFire: RateOfFireStats,
     val spread: UnitTypeValue,
     val angle: UnitTypeValue,
     val range: TypeValue,
-    val volley: VolleyStats,
-    val volleyTime: TypeValue,
-    val coefficient: TypeValue,
-    val ammoType: TypeValue,
-    val characteristic: TypeValue
+    val volley: VolleyStats?,
+    val volleyTime: TypeValue?,
+    val coefficient: TypeValue?,
+    val ammoType: TypeValue?,
+    val characteristic: CharacteristicValue,
+    val torpedo: TypeValue?,
+    val numberOfTorpedoes: UnitTypeValue?
 )
 
 /**

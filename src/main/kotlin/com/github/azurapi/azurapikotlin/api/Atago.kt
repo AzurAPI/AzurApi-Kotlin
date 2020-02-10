@@ -1,14 +1,15 @@
 package com.github.azurapi.azurapikotlin.api
 
+import com.github.azurapi.azurapikotlin.internal.entities.Equipment
 import com.github.azurapi.azurapikotlin.internal.entities.Lang
 import com.github.azurapi.azurapikotlin.internal.entities.Ship
 import com.github.azurapi.azurapikotlin.internal.entities.Version
 import com.github.azurapi.azurapikotlin.internal.exceptions.ApiException
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
+import com.github.azurapi.azurapikotlin.internal.exceptions.EquipmentNotFoundException
 import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundException
 import com.github.azurapi.azurapikotlin.internal.json.Takao
 import com.github.azurapi.azurapikotlin.internal.utils.info.AtagoInfo
-import java.util.stream.Collectors
 
 /**
  * API class
@@ -32,12 +33,7 @@ object Atago {
      * @param lang language, any language by default
      */
     fun getShipByName(name: String, lang: Lang = Lang.ANY): Ship {
-        val ship = database.findShip(name, lang)
-        if (ship != null) {
-            return ship
-        } else {
-            throw ShipNotFoundException("Could not find ship with name: $name")
-        }
+        return database.findShip(name, lang) ?: throw ShipNotFoundException("Could not find ship with name: $name")
     }
 
     /**
@@ -57,8 +53,8 @@ object Atago {
      *
      * Get list of all ships
      */
-    fun getAllShips(): List<Ship> {
-        return database.shipsById.values.stream().collect(Collectors.toList())
+    fun getAllShips(): Sequence<Ship> {
+        return database.shipsById.values.asSequence()
     }
 
     /**
@@ -81,5 +77,14 @@ object Atago {
         } catch (e: Exception) {
             throw ApiException("Could not reload database because: ${e.message}")
         }
+    }
+
+    /**
+     * @since 4.0.0
+     *
+     * Get information about an equipment by name
+     */
+    fun getEquipmentByName(name: String, lang: Lang = Lang.ANY): Equipment {
+        return database.findEquipment(name, lang) ?: throw EquipmentNotFoundException("Could not find equipment with name: $name")
     }
 }
