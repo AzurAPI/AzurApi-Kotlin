@@ -92,9 +92,6 @@ internal class Takao {
      * @param search
      */
     fun findShip(search: String, lang: Lang): Ship? {
-        val cosine = Cosine()
-        var bestScore = 0.0
-        var result: Ship? = null
         val databaseLang = when (lang) {
             Lang.EN -> shipsByEnName
             Lang.CN -> shipsByCnName
@@ -102,13 +99,20 @@ internal class Takao {
             Lang.KR -> shipsByKrName
             Lang.ANY -> shipsByEnName + shipsByCnName + shipsByJpName + shipsByKrName
         }
-        for ((name, ship) in databaseLang.entries) {
-            val score = cosine.similarity(search.toLowerCase(), name.toLowerCase())
-            if (score > bestScore) {
-                result = ship
-                bestScore = score
+        return if (databaseLang.containsKey(search)) {
+            databaseLang[search]
+        } else {
+            val cosine = Cosine()
+            var bestScore = 0.0
+            var result: Ship? = null
+            for ((name, ship) in databaseLang.entries) {
+                val score = cosine.similarity(search.toLowerCase(), name.toLowerCase())
+                if (score > bestScore) {
+                    result = ship
+                    bestScore = score
+                }
             }
+            result
         }
-        return result
     }
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.3 (2020-18-02)
+
+### Bug fixes
+
+- Fix case sensitive option in `getShipById`
+
 ## 3.1.2 (2020-01-26)
 
 ### Bug fixes

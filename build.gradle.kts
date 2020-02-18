@@ -4,13 +4,13 @@ val spekVersion = "2.0.9"
 
 plugins {
     java
-    `maven-publish`
+    maven
     kotlin("jvm") version "1.3.61"
     id("org.jmailen.kotlinter") version "2.3.0"
 }
 
 group = "com.github.AzurApi"
-version = "2.0.1"
+version = "3.1.3"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

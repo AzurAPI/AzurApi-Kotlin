@@ -8,7 +8,6 @@ import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import com.github.azurapi.azurapikotlin.internal.exceptions.ShipNotFoundException
 import com.github.azurapi.azurapikotlin.internal.json.Takao
 import com.github.azurapi.azurapikotlin.internal.utils.info.AtagoInfo
-import java.util.stream.Collectors
 
 /**
  * API class
@@ -47,8 +46,8 @@ object Atago {
      * @param id id of the ship
      */
     fun getShipById(id: String, caseSensitive: Boolean = false): Ship {
-        val formattedId = if (caseSensitive) id.toLowerCase() else id
-        return (if (caseSensitive) database.shipsById.mapKeys { it.key.toLowerCase() } else
+        val formattedId = if (!caseSensitive) id.toLowerCase() else id
+        return (if (!caseSensitive) database.shipsById.mapKeys { it.key.toLowerCase() } else
             database.shipsById)[formattedId] ?: throw ShipNotFoundException("Could not find ship with id: $id")
     }
 
@@ -58,7 +57,7 @@ object Atago {
      * Get list of all ships
      */
     fun getAllShips(): List<Ship> {
-        return database.shipsById.values.stream().collect(Collectors.toList())
+        return database.shipsById.values.toList()
     }
 
     /**
