@@ -41,8 +41,10 @@ dependencies {
 ```
 </details>
 
-## Example
+## Manual
+To use the Library, Please refer to the [Wiki](https://azurapi.github.io/)
 
+## Example
 Use methods from `Atago` class
 
 ```kotlin
