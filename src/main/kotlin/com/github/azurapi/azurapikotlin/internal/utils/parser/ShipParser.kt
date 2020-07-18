@@ -74,20 +74,19 @@ private fun jsonToSkins(jsonArray: JSONArray): List<Skin> {
 private fun jsonToStatsDetails(json: JSONObject): StatsDetails {
     try {
         return StatsDetails(
-            speed = json.getInt("speed"),
-            accuracy = json.getInt("accuracy"),
-            antiAir = json.getInt("antiair"),
-            antiSub = json.getInt("antisubmarineWarfare"),
-            armor = json.getString("armor"),
-            aviation = json.getInt("aviation"),
-            evasion = json.getInt("evasion"),
-            firepower = json.getInt("firepower"),
-            health = json.getInt("health"),
-            luck = json.getInt("luck"),
-            // FIXME: it should be defined
+            speed = json.optInt("speed"),
+            accuracy = json.optInt("accuracy"),
+            antiAir = json.optInt("antiair"),
+            antiSub = json.optInt("antisubmarineWarfare"),
+            armor = json.optString("armor"),
+            aviation = json.optInt("aviation"),
+            evasion = json.optInt("evasion"),
+            firepower = json.optInt("firepower"),
+            health = json.optInt("health"),
+            luck = json.optInt("luck"),
             oil = json.optInt("oilConsumption"),
-            reload = json.getInt("reload"),
-            torpedo = json.getInt("torpedo")
+            reload = json.optInt("reload"),
+            torpedo = json.optInt("torpedo")
         )
     } catch (e: JSONException) {
         throw e
