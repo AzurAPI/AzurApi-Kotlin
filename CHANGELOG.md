@@ -1,6 +1,12 @@
 # Changelog
 
-## 3.1.3 (2020-18-02)
+## 3.1.4 (2020-07-19)
+
+### Bug fixes
+
+- Fix errors on ship stats parsing: optional value if it doesn't exist
+
+## 3.1.3 (2020-02-18)
 
 ### Bug fixes
 
