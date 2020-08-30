@@ -303,10 +303,11 @@ class ShipParserSpec : Spek({
                     ]
                 }
             }
-        """.trimIndent()
+                """.trimIndent()
             )
             val atago = jsonToShip(
-                json.optJSONObject("201"), "201"
+                json.optJSONObject("201"),
+                "201"
             )
             expect(atago.wikiUrl).toBe("https://azurlane.koumakan.jp/Atago")
             expect(atago.id).toBe("201")

@@ -8,8 +8,8 @@ import com.github.azurapi.azurapikotlin.internal.utils.parser.jsonToShip
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.json.responseJson
 import info.debatty.java.stringsimilarity.Cosine
-import java.util.Date
 import org.json.JSONObject
+import java.util.Date
 
 /**
  * JSON deserializer object.
@@ -62,7 +62,8 @@ internal class Takao {
             jsonDatabase = loadJSON(TakaoInfo.JSON_SOURCE)
             for (shipId in jsonDatabase.keySet()) {
                 val ship = jsonToShip(
-                    jsonDatabase.getJSONObject(shipId), shipId
+                    jsonDatabase.getJSONObject(shipId),
+                    shipId
                 )
                 shipsById[ship.id] = ship
                 shipsByEnName[ship.names.en] = ship

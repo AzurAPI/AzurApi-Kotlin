@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.5 (2020-08-30)
+
+- Upgrade to kotlin 1.4.0
+
 ## 3.1.4 (2020-07-19)
 
 ### Bug fixes
