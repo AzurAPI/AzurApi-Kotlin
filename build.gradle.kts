@@ -1,16 +1,20 @@
+val atriumVersion = "0.12.0"
+val javaStringSimilarityVersion = "2.0.0"
+val jsonVersion = "20200518"
 val kotlinVersion = "1.3.61"
+val mockkVersion = "1.10.0"
 val fuelVersion = "2.2.1"
 val spekVersion = "2.0.9"
 
 plugins {
     java
     maven
-    kotlin("jvm") version "1.3.61"
-    id("org.jmailen.kotlinter") version "2.3.0"
+    kotlin("jvm") version "1.4.0"
+    id("org.jmailen.kotlinter") version "3.0.2"
 }
 
 group = "com.github.AzurApi"
-version = "3.1.3"
+version = "3.1.5"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -26,14 +30,14 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.github.kittinunf.fuel:fuel:$fuelVersion")
     implementation("com.github.kittinunf.fuel:fuel-json:$fuelVersion")
-    implementation("org.json", "json", "20190722")
-    implementation("info.debatty", "java-string-similarity", "1.2.1")
+    implementation("org.json:json:$jsonVersion")
+    implementation("info.debatty:java-string-similarity:$javaStringSimilarityVersion")
 
     testImplementation("org.spekframework.spek2:spek-dsl-jvm:$spekVersion")
     testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:$spekVersion")
     testRuntimeOnly("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
-    testImplementation("io.mockk:mockk:1.9.3")
-    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:0.9.1")
+    testImplementation("io.mockk:mockk:$mockkVersion")
+    testImplementation("ch.tutteli.atrium:atrium-fluent-en_GB:$atriumVersion")
 }
 
 tasks {

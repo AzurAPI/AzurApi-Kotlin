@@ -47,8 +47,10 @@ object Atago {
      */
     fun getShipById(id: String, caseSensitive: Boolean = false): Ship {
         val formattedId = if (!caseSensitive) id.toLowerCase() else id
-        return (if (!caseSensitive) database.shipsById.mapKeys { it.key.toLowerCase() } else
-            database.shipsById)[formattedId] ?: throw ShipNotFoundException("Could not find ship with id: $id")
+        return (
+            if (!caseSensitive) database.shipsById.mapKeys { it.key.toLowerCase() } else
+                database.shipsById
+            )[formattedId] ?: throw ShipNotFoundException("Could not find ship with id: $id")
     }
 
     /**
