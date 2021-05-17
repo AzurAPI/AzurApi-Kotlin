@@ -1,7 +1,66 @@
 package com.github.azurapi.azurapikotlin.internal.entities
 
 /**
- * Stars of a ship
+ * ShipExist
+ * @param
+ * @param
+ * @param
+ * @param
+ * */
+
+
+/**
+ * Retrofit information (Retrofit Project)
+ * @param id
+ * @param grade
+ * @param attributes
+ * @param materials
+ * @param coins
+ * @param level
+ * @param levelBreakLevel
+ * @param levelBreakStars
+ * @param recurrence
+ * @param requires
+ * */
+data class RetrofitProject(
+    val id: String,
+    val grade: String,
+    val attributes: String,
+    val materials: String,
+    val coins: Int,
+    val level: Int,
+    val levelBreakLevel: Int,
+    val levelBreakStars: String,
+    val recurrence: Int,
+    val requires: String
+)
+
+/**
+ * Tech point from fleet tech
+ * @param collection
+ * @param maxLimitBreak
+ * @param maxLevel
+ * @param total
+ * */
+data class TechPoint(
+    val collection: Int,
+    val maxLimitBreak: Int,
+    val maxLevel: Int,
+    val total: Int
+)
+
+/**
+ * Stats bonus from fleet tech
+ * @param collection
+ * @param maxLevel
+ * */
+data class TechBonus(
+    val collection: String?,
+    val maxLevel: String?,
+)
+
+/**
+ * Stars of a ship  (Ship, stars)
  * @param stars
  * @param value
  */
@@ -17,19 +76,19 @@ data class Stars(
  * @param jpClient
  * @param obtainedFrom
  * @param cost
- * @param isLive2D
+ * @param live2dModel
  */
 data class SkinInfo(
     val enClient: String,
     val cnClient: String,
     val jpClient: String,
-    val obtainedFrom: String?,
+    val obtainedFrom: String,
     val cost: Int,
-    val isLive2D: Boolean
+    val live2dModel: Boolean?
 )
 
 /**
- * Skin of a ship
+ * Skin of a ship (Skin)
  * @param image
  * @param background
  * @param name
@@ -37,21 +96,28 @@ data class SkinInfo(
  * @param info
  */
 data class Skin(
-    val image: String,
-    val background: String,
     val name: String,
     val chibi: String,
+    val image: String,
+
+    val cn: Url?,
+    val bg: Url?,
+    val nobg: Url?,
+
+    val background: String,
     val info: SkinInfo?
 )
 
 /**
- * Names of a ship in different language
+ * Names of a ship in different language    (ShipNames)
+ * @param code
  * @param jp japanese name
  * @param kr korean name
  * @param en english name
  * @param cn chinese name
  */
 data class Name(
+    val code: String,
     val jp: String,
     val kr: String,
     val en: String,
@@ -91,15 +157,19 @@ data class StatsDetails(
 )
 
 /**
- * Base stats and stats of a ship at level 120, 100
+ * Base stats and stats of a ship at level 120, 100 (ShipStats)
  * @param level120
  * @param level100
  * @param base
+ * @param level120Retrofit
+ * @param level100Retrofit
  */
 data class Stats(
     val level120: StatsDetails,
     val level100: StatsDetails,
-    val base: StatsDetails
+    val base: StatsDetails,
+    val level100Retrofit: StatsDetails?,
+    val level120Retrofit: StatsDetails?
 )
 
 /**
@@ -131,7 +201,7 @@ data class ShipConstruction(
 )
 
 /**
- * Miscellaneous info of a ship
+ * Miscellaneous info of a ship (Ship, misc)
  * @param voice
  * @param twitter
  * @param artist
@@ -147,7 +217,7 @@ data class Miscellaneous(
 )
 
 /**
- * Class representation of a ship
+ * Class representation of a ship (Ship)
  * @param thumbnail
  * @param stars
  * @param skins

@@ -1,7 +1,7 @@
 val atriumVersion = "0.12.0"
 val javaStringSimilarityVersion = "2.0.0"
 val jsonVersion = "20200518"
-val kotlinVersion = "1.4.0"
+val kotlinVersion = "1.5.0"
 val mockkVersion = "1.10.0"
 val fuelVersion = "2.2.1"
 val spekVersion = "2.0.9"
@@ -9,12 +9,12 @@ val spekVersion = "2.0.9"
 plugins {
     java
     maven
-    kotlin("jvm") version "1.4.0"
-    id("org.jmailen.kotlinter") version "3.0.2"
+    kotlin("jvm") version "1.5.0"
+    id("org.jmailen.kotlinter") version "3.4.4"
 }
 
 group = "com.github.AzurApi"
-version = "3.1.5"
+version = "3.1.6 - Beta"   //DISCUSS not sure what number to put lmao
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -26,6 +26,7 @@ repositories {
     jcenter()
 }
 
+//TODO check for update
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.github.kittinunf.fuel:fuel:$fuelVersion")

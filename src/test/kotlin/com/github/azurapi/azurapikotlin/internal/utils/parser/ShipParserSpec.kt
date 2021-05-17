@@ -331,7 +331,7 @@ class ShipParserSpec : Spek({
             expect(atago.skins[0].info!!.jpClient).isEmpty()
             expect(atago.skins[0].info!!.cost).toBe(0)
             expect(atago.skins[0].info!!.obtainedFrom).toBe("Default")
-            expect(atago.skins[0].info!!.isLive2D).toBe(false)
+            expect(atago.skins[0].info!!.live2dModel).toBe(false)
             expect(atago.skins[1].name).toBe("Oath")
             expect(atago.skins[1].image).toBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Oath/image.png")
             expect(atago.skins[1].background).toBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/backgrounds/MainDayBG.png")
@@ -342,7 +342,7 @@ class ShipParserSpec : Spek({
             expect(atago.skins[1].info!!.jpClient).toBe("白き約束")
             expect(atago.skins[1].info!!.cost).toBe(0)
             expect(atago.skins[1].info!!.obtainedFrom).toBe("Oath")
-            expect(atago.skins[1].info!!.isLive2D).toBe(false)
+            expect(atago.skins[1].info!!.live2dModel).toBe(false)
 
             expect(atago.skins[2].name).toBe("Summer March")
             expect(atago.skins[2].image).toBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Summer_March/image.png")
@@ -354,7 +354,7 @@ class ShipParserSpec : Spek({
             expect(atago.skins[2].info!!.jpClient).toBe("真夏の行進曲")
             expect(atago.skins[2].info!!.cost).toBe(700)
             expect(atago.skins[2].info!!.obtainedFrom).toBe("Skin Shop")
-            expect(atago.skins[2].info!!.isLive2D).toBe(true)
+            expect(atago.skins[2].info!!.live2dModel).toBe(true)
 
             expect(atago.skins[3].name).toBe("Hallmarks of Winter")
             expect(atago.skins[3].image).toBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/Hallmarks_of_Winter/image.png")
@@ -366,7 +366,7 @@ class ShipParserSpec : Spek({
             expect(atago.skins[3].info!!.jpClient).toBe("冬の風物詩")
             expect(atago.skins[3].info!!.cost).toBe(780)
             expect(atago.skins[3].info!!.obtainedFrom).toBe("Skin Shop")
-            expect(atago.skins[3].info!!.isLive2D).toBe(false)
+            expect(atago.skins[3].info!!.live2dModel).toBe(false)
 
             expect(atago.skins[4].name).toBe("School Traumerei")
             expect(atago.skins[4].image).toBe("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/images/skins/201/School_Traumerei/image.png")
@@ -378,7 +378,7 @@ class ShipParserSpec : Spek({
             expect(atago.skins[4].info!!.jpClient).toBe("学園トロイメライ")
             expect(atago.skins[4].info!!.cost).toBe(880)
             expect(atago.skins[4].info!!.obtainedFrom).toBe("Skin Shop")
-            expect(atago.skins[4].info!!.isLive2D).toBe(false)
+            expect(atago.skins[4].info!!.live2dModel).toBe(false)
 
             expect(atago.construction!!.constructionTime).toBe("02:05:00")
             expect(atago.construction!!.light).toBe(false)

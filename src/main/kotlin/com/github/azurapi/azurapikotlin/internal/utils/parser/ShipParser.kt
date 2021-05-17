@@ -1,23 +1,67 @@
 package com.github.azurapi.azurapikotlin.internal.utils.parser
 
-import com.github.azurapi.azurapikotlin.internal.entities.Miscellaneous
-import com.github.azurapi.azurapikotlin.internal.entities.Name
-import com.github.azurapi.azurapikotlin.internal.entities.Ship
-import com.github.azurapi.azurapikotlin.internal.entities.ShipConstruction
-import com.github.azurapi.azurapikotlin.internal.entities.Skin
-import com.github.azurapi.azurapikotlin.internal.entities.SkinInfo
-import com.github.azurapi.azurapikotlin.internal.entities.Stars
-import com.github.azurapi.azurapikotlin.internal.entities.Stats
-import com.github.azurapi.azurapikotlin.internal.entities.StatsDetails
-import com.github.azurapi.azurapikotlin.internal.entities.Url
+import com.github.azurapi.azurapikotlin.internal.entities.*
 import com.github.azurapi.azurapikotlin.internal.exceptions.DatabaseException
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.lang.Exception
+
+private fun jsonToRetrofit(json: JSONObject?): RetrofitProject? {
+    if (json == null)
+    {
+        return null
+    }
+    try {
+        return RetrofitProject(
+            id = json.getString("id"),
+            grade = json.getString("grade"),
+            attributes = json.getString("attributes"),
+            materials = json.getString("materials"),
+            coins = json.getInt("coins"),
+            level = json.getInt("level"),
+            levelBreakLevel = json.getInt("levelBreakLevel"),
+            levelBreakStars = json.getString("levelBreakStars"),
+            recurrence = json.getInt("recurrence"),
+            requires = json.getString("requires")
+        )
+    } catch (e : JSONException) {
+        throw e
+    }
+}
+
+private fun jsonToTechBonus(json: JSONObject?): TechBonus? {
+    if (json == null)
+    {
+        return null
+    }
+    try {
+        return TechBonus(
+            collection = json.optString("collection"),
+            maxLevel = json.optString("maxLevel")
+        )
+    } catch (e: JSONException) {
+        throw e
+    }
+}
+
+private fun jsonToTechPoint(json: JSONObject): TechPoint {
+    try {
+        return TechPoint(
+            collection = json.getInt("collection"),
+            maxLimitBreak = json.getInt("maxLimitBreak"),
+            maxLevel = json.getInt("maxLevel"),
+            total = json.getInt("total")
+        )
+    } catch (e: JSONException) {
+        throw e
+    }
+}
 
 private fun jsonToNames(json: JSONObject): Name {
     try {
         return Name(
+            code = json.optString("code"),
             jp = json.optString("jp"),
             en = json.getString("en"),
             cn = json.optString("cn"),
@@ -28,37 +72,64 @@ private fun jsonToNames(json: JSONObject): Name {
     }
 }
 
+
 private fun jsonToSkinInfo(json: JSONObject?): SkinInfo? {
     if (json == null) {
         return null
     }
     try {
         return SkinInfo(
+
             enClient = json.optString("enClient"),
             cnClient = json.optString("cnClient"),
             jpClient = json.optString("jpClient"),
             obtainedFrom = json.optString("obtainedFrom"),
+
             cost = try {
                 json.optString("cost").toInt()
-            } catch (e: NumberFormatException) {
+            } catch (e: Exception) {
                 0
             },
-            isLive2D = json.getBoolean("live2dModel")
+
+            live2dModel = json.getBoolean("live2dModel")
         )
     } catch (e: JSONException) {
         throw e
     }
 }
 
+/**
+ * TODO: create an experiment to check if cn, bg, nobg, background is working
+ * */
 private fun jsonToSkins(jsonArray: JSONArray): List<Skin> {
     try {
         return jsonArray.map { skin ->
             skin as JSONObject
             Skin(
                 name = skin.getString("name"),
+                chibi = skin.getString("chibi"),
                 image = skin.getString("image"),
-                background = skin.optString("background"),
-                chibi = skin.optString("chibi"),
+
+                cn = jsonToUrl(
+                    skin.optJSONObject(
+                        "cn"
+                    )
+                ),
+
+                bg = jsonToUrl(
+                    skin.getJSONObject(
+                        "bg"
+                    )
+                ),
+
+                nobg = jsonToUrl(
+                    skin.getJSONObject(
+                        "nobg"
+                    )
+                ),
+
+                background = skin.getString("background"),
+
                 info = jsonToSkinInfo(
                     skin.optJSONObject(
                         "info"
@@ -113,7 +184,15 @@ private fun jsonToStats(json: JSONObject?): Stats? {
                 json.getJSONObject(
                     "baseStats"
                 )
+            ),
+            level100Retrofit = jsonToStatsDetails(
+                json.getJSONObject("level100Retrofit")
+            ),
+
+            level120Retrofit = jsonToStatsDetails(
+                json.getJSONObject("level120Retrofit")
             )
+
         )
     } catch (e: JSONException) {
         throw e
